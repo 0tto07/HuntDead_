@@ -1,18 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ZombieMovement : MonoBehaviour
+public class EnemyFollow : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public float moveSpeed = 5f;  // Adjust this to control the speed of the enemy
+
+    private Transform player;  // Reference to the Player's transform
+
+    private void Start()
     {
-        
+        // Find the GameObject with the "Player" tag at the start
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+
+
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (player != null)
+        {
+            // Calculate the direction from the enemy to the player
+            Vector3 direction = player.position - transform.position;
+            direction.Normalize();
+
+            // Move the enemy towards the player
+            transform.Translate(direction * moveSpeed * Time.deltaTime);
+        }
     }
 }
