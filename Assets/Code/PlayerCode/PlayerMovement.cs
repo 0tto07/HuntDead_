@@ -1,30 +1,52 @@
 using UnityEngine;
 
+
 public class PlayerMovement : MonoBehaviour
 {
     // Jump parameters
-    public float SprintMultiplier = 1.5f;
     public float JumpSpeedFactor = 3.0f;
     public float JumpMaxHeight = 4.0f;
     private float JumpHeightDelta = 0.0f;
     private bool isJumping = false;
-
     // Movement parameters
-    public float MovementSpeedPerSecond = 10.0f;
+    public float BaseMovementSpeed = 10.0f;
+    public float SprintMultiplier = 1.5f;
+    public float MovementSpeedPerSecond;
+
+    private void Start()
+    {
+        MovementSpeedPerSecond = BaseMovementSpeed;
+    }
+
+
 
     // Update is called once per frame
     void Update()
     {
+        CheckForSprint();
         HandleMovement();
         HandleJump();
+        
+    }
+    void CheckForSprint()
+    {
+        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+        {
+            MovementSpeedPerSecond = BaseMovementSpeed * SprintMultiplier;
+        }
+        else
+        {
+            MovementSpeedPerSecond = BaseMovementSpeed;
+        }
     }
 
     void HandleMovement()
     {
-        float speed = MovementSpeedPerSecond * Time.deltaTime;
-        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.LeftShift))
+
+        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
         {
-            speed *= SprintMultiplier;
+            Debug.Log("Sprinting");
+            MovementSpeedPerSecond *= SprintMultiplier;
         }
 
         if (Input.GetKey(KeyCode.A))
