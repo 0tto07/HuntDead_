@@ -13,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
     public float SprintMultiplier = 1.5f;
     public float MovementSpeedPerSecond;
 
+    
+
     private void Start()
     {
         MovementSpeedPerSecond = BaseMovementSpeed;
