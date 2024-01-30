@@ -1,38 +1,42 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class PlayerData : MonoBehaviour
 {
-    public int maxHealth = 3; // Maximum health
-    private int currentHealth;  // Current health
-    public GameManger gameManger;
+    public int maxHealth = 3;
+    private int currentHealth;
+    private bool isInvincible = false;
+    public float invincibilityDurationSeconds = 0.5f;
 
-    private bool isDead;
     void Start()
     {
-        currentHealth = maxHealth; // Initialize health to maxHealth
+        currentHealth = maxHealth;
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            TakeDamage(1); // When 'T' key is pressed, take 10 damage (you can adjust this value)
-        }
-    }
-
-    // Function to apply damage to the player
     public void TakeDamage(int damageAmount)
     {
+        if (isInvincible) return;
+
         currentHealth -= damageAmount;
 
-        // Check if the player's health has reached zero or below 
-        if (currentHealth <= 0 && !isDead)
+        // Implement invincibility frames
+        if (currentHealth > 0)
         {
-            // isdead just dubbel check if player dead and after that he gose to game over Screen with Gamemanger 
-            isDead = true;
-            currentHealth = 0; // Ensure health doesn't go below zero
-            gameManger.gameOver();
+            StartCoroutine(BecomeInvincible());
         }
+        else
+        {
+            // Handle player death, such as reloading the scene
+            currentHealth = 0;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+    }
+
+    private IEnumerator BecomeInvincible()
+    {
+        isInvincible = true;
+        yield return new WaitForSeconds(invincibilityDurationSeconds);
+        isInvincible = false;
     }
 }
