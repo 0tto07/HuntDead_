@@ -8,7 +8,7 @@ public class PlayerData : MonoBehaviour
     private int currentHealth;
     private bool isInvincible = false;
     public float invincibilityDurationSeconds = 0.5f;
-
+    
     void Start()
     {
         currentHealth = maxHealth;
