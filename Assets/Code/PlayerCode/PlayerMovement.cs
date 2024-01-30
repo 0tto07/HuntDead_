@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 public class PlayerMovement : MonoBehaviour
 {
     // Jump parameters
@@ -8,19 +7,16 @@ public class PlayerMovement : MonoBehaviour
     public float JumpMaxHeight = 4.0f;
     private float JumpHeightDelta = 0.0f;
     private bool isJumping = false;
+
     // Movement parameters
     public float BaseMovementSpeed = 10.0f;
     public float SprintMultiplier = 1.5f;
-    public float MovementSpeedPerSecond;
-
-    
+    private float MovementSpeedPerSecond;
 
     private void Start()
     {
         MovementSpeedPerSecond = BaseMovementSpeed;
     }
-
-
 
     // Update is called once per frame
     void Update()
@@ -28,8 +24,8 @@ public class PlayerMovement : MonoBehaviour
         CheckForSprint();
         HandleMovement();
         HandleJump();
-        
     }
+
     void CheckForSprint()
     {
         if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
@@ -44,23 +40,20 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleMovement()
     {
+        float horizontalInput = Input.GetAxis("Horizontal");
 
-        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+        // Move the player based on the input
+        transform.Translate(Vector2.right * horizontalInput * MovementSpeedPerSecond * Time.deltaTime, Space.World);
+
+        // Flip the player's sprite if moving left
+        if (horizontalInput < 0)
         {
-            Debug.Log("Sprinting");
-            MovementSpeedPerSecond *= SprintMultiplier;
+            transform.localScale = new Vector3(-1, 1, 1); // Flip to face left
         }
-
-        if (Input.GetKey(KeyCode.A))
+        // Flip the player's sprite if moving right
+        else if (horizontalInput > 0)
         {
-            // Move Left
-            transform.Translate(-MovementSpeedPerSecond * Time.deltaTime, 0, 0);
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            // Move Right
-            transform.Translate(MovementSpeedPerSecond * Time.deltaTime, 0, 0);
-
+            transform.localScale = new Vector3(1, 1, 1); // Face right
         }
     }
 
@@ -77,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
             JumpHeightDelta += Time.deltaTime * JumpSpeedFactor * MovementSpeedPerSecond;
 
             // Move the player up
-            transform.Translate(0, Time.deltaTime * JumpSpeedFactor * MovementSpeedPerSecond, 0);
+            transform.Translate(Vector2.up * Time.deltaTime * JumpSpeedFactor * MovementSpeedPerSecond);
 
             // Check if the jump has reached its max height
             if (JumpHeightDelta >= JumpMaxHeight)
