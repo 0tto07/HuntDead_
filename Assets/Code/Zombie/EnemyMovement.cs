@@ -6,7 +6,7 @@ public class EnemyMovement : MonoBehaviour
 {
     private Transform target;
     public float speed;
-    private float followRadius = 10.0f;
+    private float followRadius = 5.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -27,5 +27,16 @@ public class EnemyMovement : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
         }
         // Optionally, you can add an else statement to define what the enemy does when the player is out of range.
+    }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            PlayerData playerData = collision.gameObject.GetComponent<PlayerData>();
+            if (playerData != null)
+            {
+                playerData.TakeDamage(1);
+            }
+        }
     }
 }
