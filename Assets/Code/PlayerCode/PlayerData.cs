@@ -5,7 +5,9 @@ public class PlayerData : MonoBehaviour
 {
     public int maxHealth = 3; // Maximum health
     private int currentHealth;  // Current health
+    public GameManger gameManger;
 
+    private bool isDead;
     void Start()
     {
         currentHealth = maxHealth; // Initialize health to maxHealth
@@ -24,12 +26,13 @@ public class PlayerData : MonoBehaviour
     {
         currentHealth -= damageAmount;
 
-        // Check if the player's health has reached zero or below
-        if (currentHealth <= 0)
+        // Check if the player's health has reached zero or below 
+        if (currentHealth <= 0 && !isDead)
         {
+            // isdead just dubbel check if player dead and after that he gose to game over Screen with Gamemanger 
+            isDead = true;
             currentHealth = 0; // Ensure health doesn't go below zero
-            // Reset the scene
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            gameManger.gameOver();
         }
     }
 }
