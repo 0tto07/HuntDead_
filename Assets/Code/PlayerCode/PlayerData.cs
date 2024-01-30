@@ -8,7 +8,9 @@ public class PlayerData : MonoBehaviour
     private int currentHealth;
     private bool isInvincible = false;
     public float invincibilityDurationSeconds = 0.5f;
-    
+    public GameManger gameManger;
+
+    private bool isdead;
     void Start()
     {
         currentHealth = maxHealth;
@@ -29,7 +31,8 @@ public class PlayerData : MonoBehaviour
         {
             // Handle player death, such as reloading the scene
             currentHealth = 0;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            gameManger.gameOver();
+            Debug.Log("Dead");
         }
     }
 
