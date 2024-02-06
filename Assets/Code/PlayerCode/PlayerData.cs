@@ -1,18 +1,45 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class PlayerData : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public int maxHealth = 3;
+    private int currentHealth;
+    private bool isInvincible = false;
+    public float invincibilityDurationSeconds = 0.5f;
+    public GameManger gameManger;
+
+    private bool isdead;
     void Start()
     {
-        
+        currentHealth = maxHealth;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void TakeDamage(int damageAmount)
     {
-        
+        if (isInvincible) return;
+
+        currentHealth -= damageAmount;
+
+        // Implement invincibility frames
+        if (currentHealth > 0)
+        {
+            StartCoroutine(BecomeInvincible());
+        }
+        else
+        {
+            // Handle player death, such as reloading the scene
+            currentHealth = 0;
+            gameManger.gameOver();
+            Debug.Log("Dead");
+        }
+    }
+
+    private IEnumerator BecomeInvincible()
+    {
+        isInvincible = true;
+        yield return new WaitForSeconds(invincibilityDurationSeconds);
+        isInvincible = false;
     }
 }
