@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class GameManger : MonoBehaviour
+public class BowArrow : MonoBehaviour
 {
-    public GameObject gameOverUI;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,9 +14,5 @@ public class GameManger : MonoBehaviour
     void Update()
     {
         
-    }
-    public void gameOver()
-    {
-      gameOverUI.SetActive(true);
     }
 }
