@@ -7,18 +7,12 @@ public class BowAndArrow : MonoBehaviour
 {
     public Rigidbody2D rb;
     [SerializeField] Transform hand;
-    
+
 
     // Start is called before the first frame update
     void Start()
     {
-       
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        MoveInput(RotateHand)
-        RotateHand();
-    }
 }
