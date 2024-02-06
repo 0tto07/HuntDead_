@@ -2160,7 +2160,7 @@ Transform:
   m_GameObject: {fileID: 637214835}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11.14, y: -4.16, z: 6.609226}
+  m_LocalPosition: {x: 4.86, y: 2.25, z: 6.609226}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5230,6 +5230,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2001199291}
+  - component: {fileID: 2001199292}
   m_Layer: 0
   m_Name: 'Drake '
   m_TagString: Untagged
@@ -5246,13 +5247,29 @@ Transform:
   m_GameObject: {fileID: 2001199290}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.0851634, y: 7.534681, z: -6.609226}
+  m_LocalPosition: {x: -44.85, y: 2.76, z: -6.609226}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 637214836}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2001199292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2001199290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c59f159f563d7f41b92cf23f0bb2f98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 2119855754}
+  followSpeed: 3
+  killDistance: 2
+  damageAmount: 3
 --- !u!1 &2014219583
 GameObject:
   m_ObjectHideFlags: 0
@@ -5541,6 +5558,11 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!4 &2119855754 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5197043185255357053, guid: cb26807a68af37b4cbcd6f088781550c, type: 3}
+  m_PrefabInstance: {fileID: 8519588677448994533}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8519588677448994533
 PrefabInstance:
   m_ObjectHideFlags: 0
