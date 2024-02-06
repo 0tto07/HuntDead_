@@ -324,8 +324,8 @@ Transform:
   m_GameObject: {fileID: 217126220}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.859377, y: -1.433032, z: 0}
-  m_LocalScale: {x: 20, y: 1, z: 1}
+  m_LocalPosition: {x: 2.9245, y: -1.4028, z: 0}
+  m_LocalScale: {x: 33.182045, y: 1.1813165, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -425,9 +425,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 662581147}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 344aa9f1f411e85488eb97acbdf857d0, type: 3}
+  m_Script: {fileID: 11500000, guid: dcf218f71a1ca4448bfa705942d11412, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 3
 --- !u!50 &662581149
 Rigidbody2D:
   serializedVersion: 4
@@ -516,7 +517,7 @@ Transform:
   m_GameObject: {fileID: 662581147}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.17, y: -0.07342945, z: 0}
+  m_LocalPosition: {x: 4.57, y: -2.86, z: 0}
   m_LocalScale: {x: 1.1463636, y: 1.1463636, z: 1.1463636}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -675,7 +676,7 @@ GameObject:
   - component: {fileID: 1614113675}
   m_Layer: 0
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -807,6 +808,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 3
   invincibilityDurationSeconds: 0.5
+  gameManger: {fileID: 0}
 --- !u!1 &1972352918
 GameObject:
   m_ObjectHideFlags: 0
