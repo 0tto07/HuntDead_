@@ -5,14 +5,18 @@ using UnityEngine.UIElements;
 
 public class BowAndArrow : MonoBehaviour
 {
-    public Rigidbody2D rb;
-    [SerializeField] Transform hand;
-
+    public Vector2 direction;
+    
 
     // Start is called before the first frame update
     void Start()
     {
-
+       
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+        Vector2 MousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    }
 }
