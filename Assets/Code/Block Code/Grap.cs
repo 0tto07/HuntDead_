@@ -11,6 +11,8 @@ public class GrabObjects : MonoBehaviour
     private Transform rayPoint;
     [SerializeField]
     private float rayDistance;
+    [SerializeField]
+    private float throwForce = 10f; // Adjust this value as needed
 
     private GameObject grabbedObject;
     private int layerIndex;
@@ -32,17 +34,26 @@ public class GrabObjects : MonoBehaviour
                 grabbedObject.GetComponent<Rigidbody2D>().isKinematic = true;
                 grabbedObject.transform.SetParent(transform);
             }
-
-            else if (Keyboard.current.eKey.wasPressedThisFrame)
+            else if (Mouse.current.leftButton.wasPressedThisFrame && grabbedObject != null)
             {
-                grabbedObject.GetComponent<Rigidbody2D>().isKinematic = false;
+                Rigidbody2D rb = grabbedObject.GetComponent<Rigidbody2D>();
+                rb.isKinematic = false;
                 grabbedObject.transform.SetParent(null);
+                Vector2 throwDirection = (hitInfo.point - (Vector2)transform.position).normalized;
+                rb.AddForce(throwDirection * throwForce, ForceMode2D.Impulse);
                 grabbedObject = null;
             }
+
             Debug.DrawRay(rayPoint.position, transform.right * rayDistance);
-
-
         }
     }
 }
+
+
+
+
+
+
+
+
 
