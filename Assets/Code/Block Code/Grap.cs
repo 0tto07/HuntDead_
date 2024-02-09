@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem; 
+using UnityEngine.InputSystem;
 
 public class GrabObjects : MonoBehaviour
 {
@@ -19,14 +19,14 @@ public class GrabObjects : MonoBehaviour
     {
         layerIndex = LayerMask.NameToLayer("Box ");
     }
-    
-     void Update()
+
+    void Update()
     {
         RaycastHit2D hitInfo = Physics2D.Raycast(rayPoint.position, transform.right, rayDistance);
 
-        if (hitInfo.collider !=null && hitInfo.collider.gameObject.layer == layerIndex) 
+        if (hitInfo.collider != null && hitInfo.collider.gameObject.layer == layerIndex)
         {
-            if (Keyboard.current.eKey.wasPressedThisFrame && grabbedObject == null) 
+            if (Keyboard.current.eKey.wasPressedThisFrame && grabbedObject == null)
             {
                 grabbedObject = hitInfo.collider.gameObject;
                 grabbedObject.GetComponent<Rigidbody2D>().isKinematic = true;
@@ -35,9 +35,9 @@ public class GrabObjects : MonoBehaviour
 
             else if (Keyboard.current.eKey.wasPressedThisFrame)
             {
-                grabbedObject.GetComponent<Rigidbody2D>().isKinematic=false;
+                grabbedObject.GetComponent<Rigidbody2D>().isKinematic = false;
                 grabbedObject.transform.SetParent(null);
-                grabbedObject=null;
+                grabbedObject = null;
             }
             Debug.DrawRay(rayPoint.position, transform.right * rayDistance);
 
@@ -45,3 +45,4 @@ public class GrabObjects : MonoBehaviour
         }
     }
 }
+
