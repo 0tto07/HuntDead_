@@ -5,24 +5,30 @@ public class PlayerMovement : MonoBehaviour
     private float horizontal;
     private float speed = 8f;
     private float jumpingPower = 16f;
+    private float horizontalMultiplier = 1f; // Added horizontal multiplier
     private bool isFacingRight = true;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
-    [SerializeField] private Transform boxCheck;
     [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private LayerMask boxLayer;
 
     void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetButtonDown("Jump"))
+        // Check if left shift is held down
+        if (Input.GetKey(KeyCode.LeftShift))
         {
-            if (IsGrounded() || IsOnBox())
-            {
-                rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
-            }
+            horizontalMultiplier = 1.5f; // If left shift is held down, double the horizontal movement
+        }
+        else
+        {
+            horizontalMultiplier = 1f; // Otherwise, use the default horizontal movement
+        }
+
+        if (Input.GetButtonDown("Jump") && IsGrounded())
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpingPower); // Apply the jumping power
         }
 
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
@@ -35,17 +41,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        rb.velocity = new Vector2(horizontal * speed * horizontalMultiplier, rb.velocity.y);
     }
 
     private bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
-    }
-
-    private bool IsOnBox()
-    {
-        return Physics2D.OverlapCircle(boxCheck.position, 0.2f, boxLayer);
     }
 
     private void Flip()
