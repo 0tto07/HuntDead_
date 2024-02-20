@@ -34,7 +34,7 @@ public class GrabObjects : MonoBehaviour
                 grabbedObject.GetComponent<Rigidbody2D>().isKinematic = true;
                 grabbedObject.transform.SetParent(transform);
             }
-            else if (Mouse.current.leftButton.wasPressedThisFrame && grabbedObject != null)
+            else if (Mouse.current.rightButton.wasPressedThisFrame && grabbedObject != null)
             {
                 Rigidbody2D rb = grabbedObject.GetComponent<Rigidbody2D>();
                 rb.isKinematic = false;
