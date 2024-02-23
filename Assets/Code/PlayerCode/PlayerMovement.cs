@@ -59,4 +59,12 @@ public class PlayerMovement : MonoBehaviour
             transform.localScale = localScale;
         }
     }
+
+    // Called when the puzzle is solved
+    public void EnableSpecialAbility()
+    {
+        // Add your custom behavior here
+        Debug.Log("Special ability activated!");
+        // For example, you might enable a special ability or perform any other action.
+    }
 }
