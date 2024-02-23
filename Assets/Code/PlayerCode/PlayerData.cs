@@ -10,7 +10,6 @@ public class PlayerData : MonoBehaviour
     public float invincibilityDurationSeconds = 0.5f;
     public GameManger gameManger;
 
-    private bool isdead;
     void Start()
     {
         currentHealth = maxHealth;
@@ -34,6 +33,15 @@ public class PlayerData : MonoBehaviour
             gameManger.gameOver();
             Debug.Log("Dead");
         }
+    }
+
+    public void Heal(int healAmount)
+    {
+        // Increase health, but not beyond the maximum
+        currentHealth += healAmount;
+        currentHealth = Mathf.Min(currentHealth, maxHealth);
+
+        // You can add any additional logic related to healing here
     }
 
     private IEnumerator BecomeInvincible()

@@ -17,9 +17,9 @@ TagManager:
   - 'Box '
   - Arrow
   - GroundedArrow
-  - 
-  - 
-  - 
+  - HealItem
+  - Player
+  - Enemy
   - 
   - 
   - 
