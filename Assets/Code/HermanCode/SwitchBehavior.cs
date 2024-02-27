@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BowArrow : MonoBehaviour
+public class SwitchBehavior : MonoBehaviour
 {
+    [SerializeField] DoorBehavior _doorBehavior;
     // Start is called before the first frame update
     void Start()
     {
