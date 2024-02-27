@@ -6,9 +6,7 @@ public class EnemyMovement : MonoBehaviour
 {
     private Transform target;
     public float speed;
-    private float followRadius = 510.0f;
-    private bool isFacingRight = true;
-    private float horizontal;
+    private float followRadius = 5.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -27,15 +25,9 @@ public class EnemyMovement : MonoBehaviour
         {
             // Move towards the player
             transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-
-            // Calculate horizontal movement
-            horizontal = target.position.x - transform.position.x;
-
-            // Flip the enemy if necessary
-            Flip();
         }
+        // Optionally, you can add an else statement to define what the enemy does when the player is out of range.
     }
-
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -45,29 +37,6 @@ public class EnemyMovement : MonoBehaviour
             {
                 playerData.TakeDamage(1);
             }
-            else
-            {
-                Debug.LogError("PlayerData component not found on player object.");
-            }
-        }
-    }
-
-    private void Flip()
-    {
-        // Determine the direction the enemy is moving in based on horizontal input
-        float movementDirection = Mathf.Sign(horizontal);
-
-        // If the movement direction is positive and the enemy is not facing right, or
-        // if the movement direction is negative and the enemy is facing right
-        if ((movementDirection > 0f && !isFacingRight) || (movementDirection < 0f && isFacingRight))
-        {
-            // Toggle the facing direction
-            isFacingRight = !isFacingRight;
-
-            // Flip the local scale along the x-axis to change direction
-            Vector3 localScale = transform.localScale;
-            localScale.x *= -1f;
-            transform.localScale = localScale;
         }
     }
 }
