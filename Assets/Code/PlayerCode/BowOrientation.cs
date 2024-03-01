@@ -9,7 +9,7 @@ public class BowOrientation : MonoBehaviour
 
     void Start()
     {
-        playerTransform = GetComponentInParent<PlayerMovement>().transform;
+        playerTransform = FindObjectOfType<PlayerMovement>().transform;
     }
 
     void Update()
