@@ -51729,7 +51729,7 @@ GameObject:
   - component: {fileID: 1346933703}
   - component: {fileID: 1346933702}
   m_Layer: 0
-  m_Name: Dragon body 2
+  m_Name: Dragon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51839,7 +51839,7 @@ Transform:
   m_GameObject: {fileID: 1346933701}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -60.93318, y: 3.6306772, z: 0}
+  m_LocalPosition: {x: -60.5, y: -0.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -52283,9 +52283,9 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 408860719}
+  - {fileID: 1346933705}
   - {fileID: 1902840188}
   - {fileID: 1559813317}
   - {fileID: 1710560449}
   - {fileID: 1480743587}
   - {fileID: 600980296}
-  - {fileID: 1346933705}
