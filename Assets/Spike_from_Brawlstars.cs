@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Healing : MonoBehaviour
+public class Spike_from_Brawlstars : MonoBehaviour
 {
     // Ensure OnCollisionEnter2D is a method of the MonoBehaviour class
     private void OnCollisionEnter2D(Collision2D collision)
@@ -10,8 +10,7 @@ public class Healing : MonoBehaviour
             PlayerData playerData = collision.gameObject.GetComponent<PlayerData>();
             if (playerData != null)
             {
-                playerData.Heal(1); // Assuming '1' is the healing amount
-                Destroy(gameObject); // Remove the healing object
+                playerData.Heal(-1); // Assuming '1' is the healing amount
             }
             else
             {
