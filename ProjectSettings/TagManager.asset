@@ -6,9 +6,10 @@ TagManager:
   tags:
   - Ground
   - Block
+  - 'Box '
   - Arrow
   - Enemy
-  - Box
+  - Rock
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - HealItem
   - Player
   - Enemy
-  - 
+  - Rock
   - 
   - 
   - 
