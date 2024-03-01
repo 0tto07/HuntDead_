@@ -17,7 +17,7 @@ public class GrabObjects : MonoBehaviour
 
     private void Start()
     {
-        layerIndex = LayerMask.NameToLayer("Box ");
+        layerIndex = LayerMask.NameToLayer("Ground");
     }
     
      void Update()
