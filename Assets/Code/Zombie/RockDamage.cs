@@ -4,6 +4,13 @@ public class RockDamage : MonoBehaviour
 {
     public int damageAmount = 1;
 
+    // Use Start for initialization
+    void Start()
+    {
+        // Destroy the rock 5 seconds after it has been instantiated
+        Destroy(gameObject, 3f);
+    }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -18,7 +25,8 @@ public class RockDamage : MonoBehaviour
                 Debug.LogError("PlayerData component not found on player object.");
             }
 
-            Destroy(gameObject); // Destroy the rock after it hits something
+            // Destroy the rock immediately after it hits the player
+            Destroy(gameObject);
         }
     }
 }
