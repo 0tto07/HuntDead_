@@ -10,7 +10,8 @@ TagManager:
   - Arrow
   - Enemy
   - Rock
-  - Wall
+  - Spike
+  - BOX
   layers:
   - Default
   - TransparentFX
@@ -18,14 +19,14 @@ TagManager:
   - Ground
   - Water
   - UI
-  - 'Box '
+  - Box
   - Arrow
   - GroundedArrow
   - HealItem
   - Player
   - Enemy
   - Rock
-  - Wall
+  - 
   - 
   - 
   - 
