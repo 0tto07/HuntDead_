@@ -6,7 +6,7 @@ public class EnemyMovement : MonoBehaviour
 {
     private Transform target;
     public float speed;
-    private float followRadius = 5.0f;
+    private float followRadius = 10.0f;
 
     // Start is called before the first frame update
     void Start()
