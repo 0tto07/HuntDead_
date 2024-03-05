@@ -47,11 +47,15 @@ public class RockThrower : MonoBehaviour
 
     private void ThrowRock()
     {
-        GameObject rockInstance = Instantiate(RockPrefab, transform.position, transform.rotation);
+        GameObject rockInstance = Instantiate(RockPrefab, transform.position, Quaternion.identity);
         Rigidbody2D rockRb = rockInstance.GetComponent<Rigidbody2D>();
         if (rockRb != null)
         {
-            rockRb.AddForce(transform.right * LaunchForce);
+            // Calculate direction towards the target
+            Vector2 throwDirection = (target.position - transform.position).normalized;
+
+            // Apply the launch force in the calculated direction
+            rockRb.AddForce(throwDirection * LaunchForce);
         }
 
         lastShotTime = Time.time;
