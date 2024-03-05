@@ -1,18 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Heart1 : MonoBehaviour
+public class HealthVisibility : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject healthObject; // Reference to the object you want to control visibility for
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        // Check if health is greater than 0
+        if (currentHealth > 0)
+        {
+            healthObject.SetActive(true); // Make the object visible
+        }
+        else
+        {
+            healthObject.SetActive(false); // Make the object invisible
+        }
     }
 }
