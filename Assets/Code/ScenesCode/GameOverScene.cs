@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
+//using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class GameOverScene : MonoBehaviour
@@ -29,7 +29,7 @@ public class GameOverScene : MonoBehaviour
     public void quit()
     {
         Application.Quit();
-        Debug.Log("Quit");
+       
     }
 
     // Update is called once per frame
