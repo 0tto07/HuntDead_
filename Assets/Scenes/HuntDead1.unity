@@ -53384,6 +53384,7 @@ GameObject:
   - component: {fileID: 451249863}
   - component: {fileID: 451249871}
   - component: {fileID: 451249872}
+  - component: {fileID: 451249873}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -53490,17 +53491,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d061eb42f4427540ab56174a3728a24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallSlidingSpeed: 0
-  wallJumpingPower: 20
   rb: {fileID: 451249864}
   groundCheck: {fileID: 1734466867}
-  wallCheck: {fileID: 1301647705}
   groundLayer:
     serializedVersion: 2
     m_Bits: 72
-  wallLayer:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!212 &451249868
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -53562,7 +53557,7 @@ Transform:
   m_GameObject: {fileID: 451249862}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 27.09, y: 9.04, z: 0}
+  m_LocalPosition: {x: 26.29, y: 7.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -53601,7 +53596,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeinair: 0
-  deathtimer: 3
+  deathtimer: 2
+--- !u!95 &451249873
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 451249862}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 18f24b3f95b57224caf6eb87c2a160ce, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &461103336
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53610,6 +53626,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2040037014272790631, guid: c239a89437942874fa07884d08979096, type: 3}
+      propertyPath: m_TagString
+      value: BOX
+      objectReference: {fileID: 0}
     - target: {fileID: 4737008845548221189, guid: c239a89437942874fa07884d08979096, type: 3}
       propertyPath: m_Name
       value: Box_Object (1)
@@ -55730,6 +55750,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2040037014272790631, guid: c239a89437942874fa07884d08979096, type: 3}
+      propertyPath: m_TagString
+      value: BOX
+      objectReference: {fileID: 0}
     - target: {fileID: 4737008845548221189, guid: c239a89437942874fa07884d08979096, type: 3}
       propertyPath: m_Name
       value: Box_Object
@@ -55780,11 +55804,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8156171326441125213, guid: c239a89437942874fa07884d08979096, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.8
+      value: 1.9
       objectReference: {fileID: 0}
     - target: {fileID: 8156171326441125213, guid: c239a89437942874fa07884d08979096, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 14.2
+      value: 16.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
