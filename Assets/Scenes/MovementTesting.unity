@@ -1422,7 +1422,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 285, y: -35}
+  m_AnchoredPosition: {x: 255, y: -35}
   m_SizeDelta: {x: 30, y: 10}
   m_Pivot: {x: 0.49999997, y: 0.5}
 --- !u!114 &1001316502
@@ -1878,6 +1878,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac47d2ef35dcd884392099d5b3521498, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData: {fileID: 0}
+  objectRenderer: {fileID: 0}
 --- !u!1 &1336189880 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 425711460632058423, guid: cb26807a68af37b4cbcd6f088781550c, type: 3}
@@ -1895,11 +1897,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d061eb42f4427540ab56174a3728a24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wallSlidingSpeed: 0
+  wallJumpingPower: 20
   rb: {fileID: 1336189883}
   groundCheck: {fileID: 1504963053}
+  wallCheck: {fileID: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &1336189882
 MonoBehaviour:
   m_ObjectHideFlags: 0

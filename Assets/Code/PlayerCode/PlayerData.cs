@@ -10,6 +10,8 @@ public class PlayerData : MonoBehaviour
     public float invincibilityDurationSeconds = 0.5f;
     public GameManger gameManger;
 
+    // Getter method for currentHealth
+
     void Start()
     {
         currentHealth = maxHealth;
