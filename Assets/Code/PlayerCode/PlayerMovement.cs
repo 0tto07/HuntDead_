@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
     private float wallJumpTime = 0.2f;
     private float timeSinceWallJump;
 
+   
+
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Transform wallCheck;
