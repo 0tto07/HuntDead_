@@ -2,13 +2,12 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public float speed = 8f;
+    public float jumpingPower = 16f;
     private float horizontal;
-    private float speed = 8f;
-    private float jumpingPower = 16f;
     private float horizontalMultiplier = 1f;
     private bool isFacingRight = true;
-
-   
+    private bool canMoveHorizontally = true; // New flag to control horizontal movement
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
@@ -42,7 +41,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(horizontal * speed * horizontalMultiplier, rb.velocity.y);
+        if (canMoveHorizontally)
+        {
+            rb.velocity = new Vector2(horizontal * speed * horizontalMultiplier, rb.velocity.y);
+        }
+    }
+
+    public void SetCanMoveHorizontally(bool canMove)
+    {
+        canMoveHorizontally = canMove;
     }
 
     public bool IsGrounded()

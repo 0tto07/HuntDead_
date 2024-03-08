@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class WallJump : MonoBehaviour
 {
-    public LayerMask wallLayer;
-    public Transform wallCheck;
-    private bool isTouchingWall;
+    [SerializeField] private LayerMask wallLayer;
+    [SerializeField] private Transform wallCheck;
+    [SerializeField] private float checkRadius = 0.2f;
+    [SerializeField] private float wallJumpingPower = 10f;
+    [SerializeField] private float wallJumpUpwardsPower = 5f;
     private Rigidbody2D rb;
-
-    public float wallJumpingPower = 10f; // Adjust as needed for desired jump strength
-    private float jumpAngle = 145f; // Angle in degrees for backward upward jump
+    private bool isFacingRight;
 
     private void Awake()
     {
@@ -17,9 +17,10 @@ public class WallJump : MonoBehaviour
 
     void Update()
     {
-        isTouchingWall = Physics2D.OverlapCircle(wallCheck.position, 0.2f, wallLayer);
+        isFacingRight = transform.localScale.x > 0;
 
-        if (Input.GetButtonDown("Jump") && isTouchingWall)
+        bool isTouchingWall = Physics2D.OverlapCircle(wallCheck.position, checkRadius, wallLayer);
+        if (isTouchingWall && Input.GetButtonDown("Jump"))
         {
             PerformWallJump();
         }
@@ -27,8 +28,30 @@ public class WallJump : MonoBehaviour
 
     private void PerformWallJump()
     {
-        // Calculate jump direction based on angle
-        Vector2 jumpDirection = new Vector2(Mathf.Cos(jumpAngle * Mathf.Deg2Rad), Mathf.Sin(jumpAngle * Mathf.Deg2Rad));
-        rb.velocity = jumpDirection * wallJumpingPower;
+        // Disable horizontal movement when performing a wall jump
+        PlayerMovement playerMovement = GetComponent<PlayerMovement>();
+        if (playerMovement != null)
+        {
+            playerMovement.SetCanMoveHorizontally(false);
+        }
+
+        float horizontalForce = isFacingRight ? -wallJumpingPower : wallJumpingPower;
+        float verticalForce = wallJumpUpwardsPower;
+
+        rb.velocity = new Vector2(horizontalForce, verticalForce);
+
+        // Optionally, re-enable horizontal movement after a delay or under certain conditions
+        // For example, you could re-enable it after a short time or when the player is grounded again.
+        // This code is just an example; adjust it according to your game's mechanics.
+        Invoke("EnableHorizontalMovement", 0.5f); // Re-enable after 0.5 seconds
+    }
+
+    private void EnableHorizontalMovement()
+    {
+        PlayerMovement playerMovement = GetComponent<PlayerMovement>();
+        if (playerMovement != null)
+        {
+            playerMovement.SetCanMoveHorizontally(true);
+        }
     }
 }
