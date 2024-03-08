@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class HealthVisibility : MonoBehaviour
+public class HealthVisibility2 : MonoBehaviour
 {
     public PlayerData playerData;
     public GameObject objectToControl;
 
     void Update()
     {
-        if (playerData.GetCurrentHealth() > 0)
+        if (playerData.GetCurrentHealth() > 1)
         {
             objectToControl.SetActive(true);
         }
