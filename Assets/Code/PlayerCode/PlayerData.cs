@@ -11,6 +11,10 @@ public class PlayerData : MonoBehaviour
     public GameManger gameManger;
 
     // Getter method for currentHealth
+    public int GetCurrentHealth()
+    {
+        return currentHealth;
+    }
 
     void Start()
     {
