@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections; // Required for IEnumerator
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -7,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     private float horizontal;
     private float horizontalMultiplier = 1f;
     private bool isFacingRight = true;
-    private bool canMoveHorizontally = true; // New flag to control horizontal movement
+    private bool canMoveHorizontally = true;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
@@ -15,7 +16,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        horizontal = Input.GetAxisRaw("Horizontal");
+        // Only read input if horizontal is not being simulated
+        if (canMoveHorizontally)
+        {
+            horizontal = Input.GetAxisRaw("Horizontal");
+        }
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -36,7 +41,14 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
 
-        Flip();
+        if (!canMoveHorizontally)
+        {
+            FlipBasedOnVelocity();
+        }
+        else
+        {
+            Flip();
+        }
     }
 
     private void FixedUpdate()
@@ -67,5 +79,33 @@ public class PlayerMovement : MonoBehaviour
             localScale.x *= -1f;
             transform.localScale = localScale;
         }
+    }
+
+    private void FlipBasedOnVelocity()
+    {
+        if ((rb.velocity.x < 0f && isFacingRight) || (rb.velocity.x > 0f && !isFacingRight))
+        {
+            isFacingRight = !isFacingRight;
+            Vector3 localScale = transform.localScale;
+            localScale.x *= -1f;
+            transform.localScale = localScale;
+        }
+    }
+
+    public void SimulateHorizontalInput(float simulatedInput)
+    {
+        horizontal = simulatedInput;
+        StartCoroutine(ResetSimulatedInputAfterDelay(0.1f)); // Reset after 0.1 seconds
+    }
+
+    private IEnumerator ResetSimulatedInputAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        horizontal = 0;
+    }
+
+    public bool IsFacingRight()
+    {
+        return isFacingRight;
     }
 }
