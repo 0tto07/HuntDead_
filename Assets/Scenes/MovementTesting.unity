@@ -1933,17 +1933,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d061eb42f4427540ab56174a3728a24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallSlidingSpeed: 0
-  wallJumpingPower: 20
+  speed: 8
+  jumpingPower: 16
   rb: {fileID: 1336189883}
   groundCheck: {fileID: 1504963053}
-  wallCheck: {fileID: 679359467}
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  wallLayer:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!114 &1336189882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2379,6 +2375,7 @@ GameObject:
   - component: {fileID: 1760128712}
   - component: {fileID: 1760128711}
   - component: {fileID: 1760128713}
+  - component: {fileID: 1760128714}
   m_Layer: 5
   m_Name: Heart 2
   m_TagString: Untagged
@@ -2453,6 +2450,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9aa428d0d15f1f6409edfc8370247c63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerData: {fileID: 1336189882}
+  objectToControl: {fileID: 1760128709}
+--- !u!114 &1760128714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760128709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6349f09b4b39934b8c030bae5fe6377, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 1336189882}
