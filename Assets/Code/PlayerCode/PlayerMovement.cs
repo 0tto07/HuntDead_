@@ -1,52 +1,69 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 8f;
-    public float jumpingPower = 16f;
-    private float horizontal;
-    private float horizontalMultiplier = 1f;
-    private bool isFacingRight = true;
-    private bool canMoveHorizontally = true; // New flag to control horizontal movement
+    // Configurable parameters
+    [SerializeField] float runSpeed = 8f;
+    [SerializeField] float jumpSpeed = 10f;
+    [SerializeField] Transform groundCheck;
+    [SerializeField] LayerMask groundLayer;
 
-    [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private LayerMask groundLayer;
+    // Private variables
+    Vector2 moveInput;
+    Vector2 runVelocity;
+    bool jumpPressed = false;
 
-    void Update()
+    float horizontalMultiplier = 1f;
+    bool canMoveHorizontally = true; 
+
+    // Cached references
+    Animator myAnimator;
+    Rigidbody2D myRigidbody;
+
+    private void Awake()
     {
-        horizontal = Input.GetAxisRaw("Horizontal");
-
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            horizontalMultiplier = 1.5f;
-        }
-        else
-        {
-            horizontalMultiplier = 1f;
-        }
-
-        if (Input.GetButtonDown("Jump") && IsGrounded())
-        {
-            rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
-        }
-
-        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-        }
-
-        Flip();
+        myAnimator = GetComponentInChildren<Animator>();
+        myRigidbody = GetComponent<Rigidbody2D>();
     }
 
-    private void FixedUpdate()
+    void Update() // Updates every frame
     {
-        if (canMoveHorizontally)
+        moveInput.x = Input.GetAxisRaw("Horizontal");
+
+        if (Input.GetButtonDown("Jump"))
         {
-            rb.velocity = new Vector2(horizontal * speed * horizontalMultiplier, rb.velocity.y);
+            jumpPressed = true;
         }
     }
 
+    void FixedUpdate() // Updates every 0.02 second
+    {
+        Run();
+        Jump();
+        Fall();
+        FlipSprite();
+    }
+
+    void Run()
+    {
+        runVelocity = new Vector2(moveInput.x * runSpeed, myRigidbody.velocity.y);
+        myRigidbody.velocity = runVelocity;
+
+        bool playerHasHorizontalSpeed = Mathf.Abs(myRigidbody.velocity.x) > Mathf.Epsilon;
+        myAnimator.SetBool("isRunning", playerHasHorizontalSpeed);
+    }
+
+    void Jump()
+    {
+        if (jumpPressed && IsGrounded())
+        {
+            myRigidbody.velocity += new Vector2(0f, jumpSpeed);
+            jumpPressed = false;
+        }
+    }
+
+    // TODO integrate with the new jumping and movement system
     public void SetCanMoveHorizontally(bool canMove)
     {
         canMoveHorizontally = canMove;
@@ -57,15 +74,27 @@ public class PlayerMovement : MonoBehaviour
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 
-    private void Flip()
+    void FlipSprite()
     {
-        bool shouldFlip = isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f;
-        if (shouldFlip)
+        bool playerHasHorizontalSpeed = Mathf.Abs(myRigidbody.velocity.x) > Mathf.Epsilon;
+
+        if (playerHasHorizontalSpeed)
         {
-            isFacingRight = !isFacingRight;
-            Vector3 localScale = transform.localScale;
-            localScale.x *= -1f;
-            transform.localScale = localScale;
+            transform.localScale = new Vector2(Mathf.Sign(myRigidbody.velocity.x), 1f);
+        }
+    }
+
+    void Fall()
+    {
+        bool playerHasNegativeVerticalSpeed = myRigidbody.velocity.y < Mathf.Epsilon;
+
+        if (playerHasNegativeVerticalSpeed && !IsGrounded())
+        {
+            myAnimator.SetBool("isFalling", true);
+        }
+        else
+        {
+            myAnimator.SetBool("isFalling", false);
         }
     }
 }
