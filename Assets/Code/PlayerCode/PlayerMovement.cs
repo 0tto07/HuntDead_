@@ -1,64 +1,69 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using System.Collections; // Required for IEnumerator
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 8f;
-    public float jumpingPower = 16f;
-    private float horizontal;
-    private float horizontalMultiplier = 1f;
-    private bool isFacingRight = true;
-    private bool canMoveHorizontally = true;
+    // Configurable parameters
+    [SerializeField] float runSpeed = 8f;
+    [SerializeField] float jumpSpeed = 10f;
+    [SerializeField] Transform groundCheck;
+    [SerializeField] LayerMask groundLayer;
 
-    [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private LayerMask groundLayer;
+    // Private variables
+    Vector2 moveInput;
+    Vector2 runVelocity;
+    bool jumpPressed = false;
 
-    void Update()
+    float horizontalMultiplier = 1f;
+    bool canMoveHorizontally = true; 
+
+    // Cached references
+    Animator myAnimator;
+    Rigidbody2D myRigidbody;
+
+    private void Awake()
     {
-        // Only read input if horizontal is not being simulated
-        if (canMoveHorizontally)
-        {
-            horizontal = Input.GetAxisRaw("Horizontal");
-        }
+        myAnimator = GetComponentInChildren<Animator>();
+        myRigidbody = GetComponent<Rigidbody2D>();
+    }
 
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            horizontalMultiplier = 1.5f;
-        }
-        else
-        {
-            horizontalMultiplier = 1f;
-        }
+    void Update() // Updates every frame
+    {
+        moveInput.x = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetButtonDown("Jump") && IsGrounded())
+        if (Input.GetButtonDown("Jump"))
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
-        }
-
-        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-        }
-
-        if (!canMoveHorizontally)
-        {
-            FlipBasedOnVelocity();
-        }
-        else
-        {
-            Flip();
+            jumpPressed = true;
         }
     }
 
-    private void FixedUpdate()
+    void FixedUpdate() // Updates every 0.02 second
     {
-        if (canMoveHorizontally)
+        Run();
+        Jump();
+        Fall();
+        FlipSprite();
+    }
+
+    void Run()
+    {
+        runVelocity = new Vector2(moveInput.x * runSpeed, myRigidbody.velocity.y);
+        myRigidbody.velocity = runVelocity;
+
+        bool playerHasHorizontalSpeed = Mathf.Abs(myRigidbody.velocity.x) > Mathf.Epsilon;
+        myAnimator.SetBool("isRunning", playerHasHorizontalSpeed);
+    }
+
+    void Jump()
+    {
+        if (jumpPressed && IsGrounded())
         {
-            rb.velocity = new Vector2(horizontal * speed * horizontalMultiplier, rb.velocity.y);
+            myRigidbody.velocity += new Vector2(0f, jumpSpeed);
+            jumpPressed = false;
         }
     }
 
+    // TODO integrate with the new jumping and movement system
     public void SetCanMoveHorizontally(bool canMove)
     {
         canMoveHorizontally = canMove;
@@ -69,43 +74,27 @@ public class PlayerMovement : MonoBehaviour
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 
-    private void Flip()
+    void FlipSprite()
     {
-        bool shouldFlip = isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f;
-        if (shouldFlip)
+        bool playerHasHorizontalSpeed = Mathf.Abs(myRigidbody.velocity.x) > Mathf.Epsilon;
+
+        if (playerHasHorizontalSpeed)
         {
-            isFacingRight = !isFacingRight;
-            Vector3 localScale = transform.localScale;
-            localScale.x *= -1f;
-            transform.localScale = localScale;
+            transform.localScale = new Vector2(Mathf.Sign(myRigidbody.velocity.x), 1f);
         }
     }
 
-    private void FlipBasedOnVelocity()
+    void Fall()
     {
-        if ((rb.velocity.x < 0f && isFacingRight) || (rb.velocity.x > 0f && !isFacingRight))
+        bool playerHasNegativeVerticalSpeed = myRigidbody.velocity.y < Mathf.Epsilon;
+
+        if (playerHasNegativeVerticalSpeed && !IsGrounded())
         {
-            isFacingRight = !isFacingRight;
-            Vector3 localScale = transform.localScale;
-            localScale.x *= -1f;
-            transform.localScale = localScale;
+            myAnimator.SetBool("isFalling", true);
         }
-    }
-
-    public void SimulateHorizontalInput(float simulatedInput)
-    {
-        horizontal = simulatedInput;
-        StartCoroutine(ResetSimulatedInputAfterDelay(0.1f)); // Reset after 0.1 seconds
-    }
-
-    private IEnumerator ResetSimulatedInputAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        horizontal = 0;
-    }
-
-    public bool IsFacingRight()
-    {
-        return isFacingRight;
+        else
+        {
+            myAnimator.SetBool("isFalling", false);
+        }
     }
 }
