@@ -12,8 +12,7 @@ TagManager:
   - Rock
   - Spike
   - BOX
-  - Wall
-  - Bow
+  - WinObject
   layers:
   - Default
   - TransparentFX
@@ -28,9 +27,9 @@ TagManager:
   - Player
   - Enemy
   - Rock
+  - WinObject
   - Wall
-  - 
-  - 
+  - Tiles
   - 
   - 
   - 
@@ -50,4 +49,25 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 114569961
+    locked: 0
+  - name: Backtiles
+    uniqueID: 3324210505
+    locked: 0
+  - name: Player
+    uniqueID: 1044054801
+    locked: 0
+  - name: Tiles
+    uniqueID: 1245813829
+    locked: 0
+  - name: Forground1
+    uniqueID: 688609515
+    locked: 0
+  - name: Forground2
+    uniqueID: 1330354349
+    locked: 0
+  - name: Closeforground
+    uniqueID: 3963394133
     locked: 0
