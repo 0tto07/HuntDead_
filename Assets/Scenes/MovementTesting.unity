@@ -1287,7 +1287,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 1336189882}
-  objectToControl: {fileID: 772691466}
+  heartImage: {fileID: 772691468}
 --- !u!1 &952950357
 GameObject:
   m_ObjectHideFlags: 0
@@ -1915,7 +1915,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 1336189882}
-  objectToControl: {fileID: 1334077068}
+  heartImage: {fileID: 1334077070}
 --- !u!1 &1336189880 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 425711460632058423, guid: cb26807a68af37b4cbcd6f088781550c, type: 3}
@@ -1933,9 +1933,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d061eb42f4427540ab56174a3728a24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 8
-  jumpingPower: 16
-  rb: {fileID: 1336189883}
+  runSpeed: 8
+  jumpSpeed: 10
   groundCheck: {fileID: 1504963053}
   groundLayer:
     serializedVersion: 2
@@ -1955,11 +1954,6 @@ MonoBehaviour:
   maxHealth: 3
   invincibilityDurationSeconds: 0.5
   gameManger: {fileID: 0}
---- !u!50 &1336189883 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 1543227707379141297, guid: cb26807a68af37b4cbcd6f088781550c, type: 3}
-  m_PrefabInstance: {fileID: 1916709864}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1336189886 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5197043185255357053, guid: cb26807a68af37b4cbcd6f088781550c, type: 3}
@@ -2373,7 +2367,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1760128710}
   - component: {fileID: 1760128712}
-  - component: {fileID: 1760128711}
   - component: {fileID: 1760128713}
   - component: {fileID: 1760128714}
   m_Layer: 5
@@ -2391,18 +2384,40 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1760128709}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2}
-  m_LocalScale: {x: 0.50000006, y: 0.50000006, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.9999996}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2014646529}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 60, y: 45.5}
+  m_AnchoredPosition: {x: 80, y: -35}
   m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.1, y: 2.11}
---- !u!114 &1760128711
+  m_Pivot: {x: 0.49999994, y: 0.49999976}
+--- !u!222 &1760128712
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760128709}
+  m_CullTransparentMesh: 1
+--- !u!114 &1760128713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760128709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aa428d0d15f1f6409edfc8370247c63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerData: {fileID: 1336189882}
+  heartImage: {fileID: 1760128714}
+--- !u!114 &1760128714
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2432,41 +2447,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!222 &1760128712
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1760128709}
-  m_CullTransparentMesh: 1
---- !u!114 &1760128713
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1760128709}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9aa428d0d15f1f6409edfc8370247c63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerData: {fileID: 1336189882}
-  objectToControl: {fileID: 1760128709}
---- !u!114 &1760128714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1760128709}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a52d1d5807312241bc5e3a494847bd3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectToControl: {fileID: 1760128709}
 --- !u!1 &1765207616
 GameObject:
   m_ObjectHideFlags: 0
