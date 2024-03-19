@@ -7,7 +7,7 @@ public class GameOverScene : MonoBehaviour
 {
 
     public GameObject gameOverUI;
-    // Start is called before the first frame update
+    
     void Start()
     {
         Cursor.visible = false;

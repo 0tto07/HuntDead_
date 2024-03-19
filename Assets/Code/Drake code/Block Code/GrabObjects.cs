@@ -33,7 +33,7 @@ public class GrabObjects : MonoBehaviour
                 grabbedObject = hitInfo.collider.gameObject;
                 grabbedObject.GetComponent<Rigidbody2D>().isKinematic = true;
                 grabbedObject.GetComponent<BoxCollider2D>().enabled = false;
-                grabbedObject.GetComponentInChildren<Animator>().SetBool("PickUp", true);
+                grabbedObject.GetComponentInChildren<Animator>().SetBool("isPickUp", true);
                 grabbedObject.transform.SetParent(transform);
             }
 
@@ -45,7 +45,7 @@ public class GrabObjects : MonoBehaviour
             Debug.Log("pressed 2");
             grabbedObject.GetComponent<Rigidbody2D>().isKinematic = false;
             grabbedObject.GetComponent<BoxCollider2D>().enabled = true;
-            grabbedObject.GetComponentInChildren<Animator>().SetBool("PickUp", false);
+            grabbedObject.GetComponentInChildren<Animator>().SetBool("isPickUp", false);
             grabbedObject.transform.SetParent(null);
             grabbedObject = null;
         }
