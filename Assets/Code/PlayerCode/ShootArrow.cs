@@ -6,6 +6,9 @@ public class ShootArrow : MonoBehaviour
 {
     public float LaunchForce;
     public GameObject Arrow;
+
+    [SerializeField] Transform theRotationOfTheBow;
+    [SerializeField] Transform thePLayerPosition;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +18,7 @@ public class ShootArrow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        transform.position = thePLayerPosition.position;
         if (Input.GetKeyDown(KeyCode.Mouse0))
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
@@ -23,8 +27,8 @@ public class ShootArrow : MonoBehaviour
         void Shoot()
         {
 
-            GameObject ArrowIns = Instantiate(Arrow, transform.position, transform.rotation);
-            ArrowIns.GetComponent<Rigidbody2D>().AddForce(transform.right * LaunchForce);
+            GameObject ArrowIns = Instantiate(Arrow, transform.position, theRotationOfTheBow.rotation);
+            ArrowIns.GetComponent<Rigidbody2D>().AddForce(-transform.right * LaunchForce);
         }
     }
 }

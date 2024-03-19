@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem; 
+using UnityEngine.InputSystem;
 
 public class GrabObjects : MonoBehaviour
 {
@@ -14,42 +12,55 @@ public class GrabObjects : MonoBehaviour
 
     private GameObject grabbedObject;
     private int layerIndex;
+    private GameObject[] bowObjects; // Array to hold objects with the "Bow" tag
 
     private void Start()
     {
         layerIndex = LayerMask.NameToLayer("BOX");
+        // Find all objects with the "Bow" tag at the start and store them in the bowObjects array
+        bowObjects = GameObject.FindGameObjectsWithTag("Bow");
         Debug.Log(layerIndex);
     }
-    
-     void Update()
+
+    void Update()
     {
         RaycastHit2D hitInfo = Physics2D.Raycast(rayPoint.position, transform.right, rayDistance);
 
-        if (hitInfo.collider !=null && hitInfo.collider.gameObject.layer == layerIndex) 
+        if (hitInfo.collider != null && hitInfo.collider.gameObject.layer == layerIndex)
         {
-            if (Keyboard.current.eKey.wasPressedThisFrame && grabbedObject == null) 
+            if (Keyboard.current.qKey.wasPressedThisFrame && grabbedObject == null)
             {
-                Debug.Log("pressed 1");
+                Debug.Log("Grabbed");
                 grabbedObject = hitInfo.collider.gameObject;
                 grabbedObject.GetComponent<Rigidbody2D>().isKinematic = true;
                 grabbedObject.GetComponent<BoxCollider2D>().enabled = false;
                 grabbedObject.GetComponentInChildren<Animator>().SetBool("PickUp", true);
-                grabbedObject.transform.SetParent(transform);
+                grabbedObject.transform.SetParent(grabPoint);
+                // Deactivate all objects with the "Bow" tag
+                SetBowObjectsActive(false);
             }
-
-
-
         }
-        else if (Keyboard.current.eKey.wasPressedThisFrame && grabbedObject)
+        else if (Keyboard.current.qKey.wasPressedThisFrame && grabbedObject != null)
         {
-            Debug.Log("pressed 2");
+            Debug.Log("Released");
             grabbedObject.GetComponent<Rigidbody2D>().isKinematic = false;
             grabbedObject.GetComponent<BoxCollider2D>().enabled = true;
             grabbedObject.GetComponentInChildren<Animator>().SetBool("PickUp", false);
             grabbedObject.transform.SetParent(null);
             grabbedObject = null;
+            // Reactivate all objects with the "Bow" tag
+            SetBowObjectsActive(true);
         }
-        Debug.DrawRay(rayPoint.position, transform.right * rayDistance);
 
+        Debug.DrawRay(rayPoint.position, transform.right * rayDistance);
+    }
+
+    // Method to activate/deactivate all objects with the "Bow" tag
+    private void SetBowObjectsActive(bool active)
+    {
+        foreach (GameObject bowObject in bowObjects)
+        {
+            bowObject.SetActive(active);
+        }
     }
 }

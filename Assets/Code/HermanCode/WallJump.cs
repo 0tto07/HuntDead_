@@ -31,12 +31,12 @@ public class WallJump : MonoBehaviour
         {
             playerMovement.SetCanMoveHorizontally(false);
 
-            float directionMultiplier = playerMovement.IsFacingRight() ? -1 : 1;
+            float directionMultiplier = playerMovement.transform.localScale.x > 0 ? -1 : 1;
             float horizontalForce = directionMultiplier * wallJumpingPower;
             rb.velocity = new Vector2(horizontalForce, wallJumpUpwardsPower);
 
-            // Simulate pressing the movement button in the direction of the jump
-            playerMovement.SimulateHorizontalInput(directionMultiplier);
+            // Manually set the flip direction based on the wall jump direction
+            playerMovement.SetOverrideFlipDirection(true, directionMultiplier);
 
             Invoke("EnableHorizontalMovement", 0.5f);
         }
@@ -47,6 +47,8 @@ public class WallJump : MonoBehaviour
         if (playerMovement != null)
         {
             playerMovement.SetCanMoveHorizontally(true);
+            // Reset the flip direction to automatic based on velocity
+            playerMovement.SetOverrideFlipDirection(false);
         }
     }
 }

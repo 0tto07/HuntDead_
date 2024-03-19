@@ -1,23 +1,21 @@
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    // Configurable parameters
     [SerializeField] float runSpeed = 8f;
     [SerializeField] float jumpSpeed = 10f;
     [SerializeField] Transform groundCheck;
     [SerializeField] LayerMask groundLayer;
 
-    // Private variables
     Vector2 moveInput;
     Vector2 runVelocity;
     bool jumpPressed = false;
 
-    float horizontalMultiplier = 1f;
-    bool canMoveHorizontally = true; 
+    float horizontalMultiplier = 1.001f;
+    bool canMoveHorizontally = true;
+    private bool overrideFlipDirection = false;
+    private float flipDirection = 1f; // 1 for right, -1 for left
 
-    // Cached references
     Animator myAnimator;
     Rigidbody2D myRigidbody;
 
@@ -27,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
         myRigidbody = GetComponent<Rigidbody2D>();
     }
 
-    void Update() // Updates every frame
+    void Update()
     {
         moveInput.x = Input.GetAxisRaw("Horizontal");
 
@@ -37,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void FixedUpdate() // Updates every 0.02 second
+    void FixedUpdate()
     {
         Run();
         Jump();
@@ -47,6 +45,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Run()
     {
+        if (!canMoveHorizontally) return;
+
         runVelocity = new Vector2(moveInput.x * runSpeed, myRigidbody.velocity.y);
         myRigidbody.velocity = runVelocity;
 
@@ -63,12 +63,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    // TODO integrate with the new jumping and movement system
-    public void SetCanMoveHorizontally(bool canMove)
-    {
-        canMoveHorizontally = canMove;
-    }
-
     public bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
@@ -76,25 +70,40 @@ public class PlayerMovement : MonoBehaviour
 
     void FlipSprite()
     {
-        bool playerHasHorizontalSpeed = Mathf.Abs(myRigidbody.velocity.x) > Mathf.Epsilon;
-
-        if (playerHasHorizontalSpeed)
+        if (overrideFlipDirection)
         {
-            transform.localScale = new Vector2(Mathf.Sign(myRigidbody.velocity.x), 1f);
+            transform.localScale = new Vector2(flipDirection, 1f);
+        }
+        else
+        {
+            bool playerHasHorizontalSpeed = Mathf.Abs(myRigidbody.velocity.x) > Mathf.Epsilon;
+            if (playerHasHorizontalSpeed)
+            {
+               transform.localScale = new Vector2(Mathf.Sign(myRigidbody.velocity.x), 1f);
+            }
         }
     }
 
     void Fall()
     {
-        bool playerHasNegativeVerticalSpeed = myRigidbody.velocity.y < Mathf.Epsilon;
+        bool playerHasNegativeVerticalSpeed = myRigidbody.velocity.y < 0;
+        myAnimator.SetBool("isFalling", playerHasNegativeVerticalSpeed && !IsGrounded());
+    }
 
-        if (playerHasNegativeVerticalSpeed && !IsGrounded())
-        {
-            myAnimator.SetBool("isFalling", true);
-        }
-        else
-        {
-            myAnimator.SetBool("isFalling", false);
-        }
+    public void SetCanMoveHorizontally(bool canMove)
+    {
+        canMoveHorizontally = canMove;
+    }
+
+    public void SimulateHorizontalInput(float direction)
+    {
+        moveInput.x = direction;
+    }
+
+    public void SetOverrideFlipDirection(bool overrideFlip, float direction = 1f)
+    {
+        overrideFlipDirection = overrideFlip;
+        flipDirection = direction;
+        FlipSprite(); // Apply the flip immediately if needed
     }
 }
