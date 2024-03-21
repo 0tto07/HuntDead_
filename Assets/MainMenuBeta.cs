@@ -7,6 +7,6 @@ public class MainMenu : MonoBehaviour
 {
     public void PlayGame()
     {
-        SceneManager.LoadSceneAsync("HuntDead1"); // Make sure your scene name is correct
+        SceneManager.LoadSceneAsync("HuntDeadMap1"); // Make sure your scene name is correct
     }
 }

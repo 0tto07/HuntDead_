@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 9173914ab873d7e40878d96230478cdf
   - enabled: 1
-    path: Assets/Scenes/HuntDead1.unity
-    guid: c1879a98ca8325b46a440dacd1655bfb
+    path: Assets/Scenes/HuntDeadMap1.unity
+    guid: b1cd93f6f5e628e4f86fa14daa05c906
   m_configObjects: {}

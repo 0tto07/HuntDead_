@@ -2,22 +2,19 @@ using UnityEngine;
 
 public class Spike_from_Brawlstars : MonoBehaviour
 {
-    // Ensure OnCollisionEnter2D is a method of the MonoBehaviour class
-    private void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
-            PlayerData playerData = collision.gameObject.GetComponent<PlayerData>();
+            
+            PlayerData playerData = other.GetComponent<PlayerData>();
+
+          
             if (playerData != null)
             {
-                playerData.Heal(-1); // Assuming '1' is the healing amount
-            }
-            else
-            {
-                Debug.LogError("PlayerData component not found on player object.");
+            
+                playerData.TakeDamage(1);
             }
         }
     }
-
-    // Other methods or logic for the Healing class
 }
