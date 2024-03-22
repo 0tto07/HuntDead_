@@ -21,7 +21,7 @@ public class BowAiming : MonoBehaviour
         mouseWorldPosition.z = transform.position.z; // Ensure the z-position matches the bow to keep the aiming in 2D space.
         Debug.Log(transform.position);
 
-        Vector2 directionToMouse = mouseWorldPosition - transform.position;
+        Vector2 directionToMouse = -1*(mouseWorldPosition - transform.position);
         float angle = Mathf.Atan2(directionToMouse.y, directionToMouse.x) * Mathf.Rad2Deg;
 
         transform.rotation = Quaternion.Euler(0, 0, angle);
