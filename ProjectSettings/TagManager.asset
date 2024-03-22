@@ -59,11 +59,11 @@ TagManager:
   - name: Player
     uniqueID: 1044054801
     locked: 0
-  - name: 'Dragon '
-    uniqueID: 3802729385
-    locked: 0
   - name: Tiles
     uniqueID: 1245813829
+    locked: 0
+  - name: 'Dragon '
+    uniqueID: 3802729385
     locked: 0
   - name: Forground1
     uniqueID: 688609515
