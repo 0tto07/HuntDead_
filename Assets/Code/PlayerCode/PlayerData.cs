@@ -9,6 +9,7 @@ public class PlayerData : MonoBehaviour
     private bool isInvincible = false;
     public float invincibilityDurationSeconds = 0.5f;
     public GameManger gameManger;
+    private AudioSource SFX_hitSound;
 
     // Getter method for currentHealth
     public int GetCurrentHealth()
@@ -19,6 +20,7 @@ public class PlayerData : MonoBehaviour
 
     void Start()
     {
+        SFX_hitSound = GameObject.Find("SFX_hitSound").GetComponent<AudioSource>(); 
         currentHealth = maxHealth;
     }
 
@@ -53,8 +55,14 @@ public class PlayerData : MonoBehaviour
 
     private IEnumerator BecomeInvincible()
     {
+        if(SFX_hitSound != null) {
+            SFX_hitSound.Play();
+        }
+            
         isInvincible = true;
         yield return new WaitForSeconds(invincibilityDurationSeconds);
         isInvincible = false;
+        
+        Debug.Log("GetHit");
     }
 }

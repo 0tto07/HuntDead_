@@ -18,11 +18,19 @@ public class PlayerMovement : MonoBehaviour
 
     Animator myAnimator;
     Rigidbody2D myRigidbody;
+    AudioManager myAudioManager;
+
+    private bool walkSoundIsPlaying;
 
     private void Awake()
     {
         myAnimator = GetComponentInChildren<Animator>();
         myRigidbody = GetComponent<Rigidbody2D>();
+    }
+
+    private void Start()
+    {
+        myAudioManager = FindObjectOfType<AudioManager>();
     }
 
     void Update()
@@ -52,6 +60,20 @@ public class PlayerMovement : MonoBehaviour
 
         bool playerHasHorizontalSpeed = Mathf.Abs(myRigidbody.velocity.x) > Mathf.Epsilon;
         myAnimator.SetBool("isRunning", playerHasHorizontalSpeed);
+
+        if (playerHasHorizontalSpeed && !walkSoundIsPlaying && IsGrounded())
+        {
+            Debug.Log("hej");
+            walkSoundIsPlaying = true;
+            AudioManager.Instance.PlaySFX("PlayerWalk");
+        }   
+
+
+        if(!playerHasHorizontalSpeed || !IsGrounded())
+        {
+            walkSoundIsPlaying = false;
+            AudioManager.Instance.StopSoundEffect();
+        }
     }
 
     void Jump()
