@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ArrowScript : MonoBehaviour
@@ -8,12 +6,14 @@ public class ArrowScript : MonoBehaviour
     private bool isGrounded;
     private int groundLayer;
     private int groundedArrowLayer;
+    private int zombieLayer;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         groundLayer = LayerMask.NameToLayer("Ground");
         groundedArrowLayer = LayerMask.NameToLayer("GroundedArrow");
+        zombieLayer = LayerMask.NameToLayer("Zombie");
     }
 
     void Update()
@@ -35,12 +35,34 @@ public class ArrowScript : MonoBehaviour
     {
         if (collision.gameObject.layer == groundLayer)
         {
-            isGrounded = true;
-            gameObject.layer = groundedArrowLayer;
-            rb.velocity = Vector2.zero; // Stop the arrow
-            rb.isKinematic = true; // Make the Rigidbody kinematic
-            rb.angularVelocity = 0; // Stop any rotational movement
-            // Optionally, disable any other arrow-specific behaviors now that it's grounded
+            GroundArrow();
+        }
+        else if (collision.gameObject.layer == zombieLayer)
+        {
+            DamageZombie(collision.gameObject);
+        }
+    }
+
+    private void GroundArrow()
+    {
+        isGrounded = true;
+        gameObject.layer = groundedArrowLayer;
+        rb.velocity = Vector2.zero;
+        rb.isKinematic = true;
+        rb.angularVelocity = 0;
+    }
+
+    private void DamageZombie(GameObject zombie)
+    {
+        ZombieData zombieData = zombie.GetComponent<ZombieData>();
+        if (zombieData != null)
+        {
+            zombieData.hitPoints -= 1;
+            if (zombieData.hitPoints <= 0)
+            {
+                Destroy(zombie);
+            }
+            GroundArrow();
         }
     }
 }

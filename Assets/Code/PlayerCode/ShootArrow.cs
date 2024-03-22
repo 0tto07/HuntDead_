@@ -8,27 +8,25 @@ public class ShootArrow : MonoBehaviour
     public GameObject Arrow;
 
     [SerializeField] Transform theRotationOfTheBow;
-    [SerializeField] Transform thePLayerPosition;
-    // Start is called before the first frame update
-    void Start()
-    {
+    [SerializeField] Transform thePlayerPosition;
 
-    }
+    private float cooldown = 2f; // 2 seconds cooldown
+    private float nextShootTime = 0f; // Timestamp of when you can shoot next
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = thePLayerPosition.position;
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-            if (Input.GetKeyDown(KeyCode.Mouse0))
-            {
-                Shoot();
-            }
-        void Shoot()
+        transform.position = thePlayerPosition.position;
+        if (Time.time >= nextShootTime && Input.GetKeyDown(KeyCode.Mouse0))
         {
-
-            GameObject ArrowIns = Instantiate(Arrow, transform.position, theRotationOfTheBow.rotation);
-            ArrowIns.GetComponent<Rigidbody2D>().AddForce(-transform.right * LaunchForce);
+            Shoot();
+            nextShootTime = Time.time + cooldown; // Set the next shoot time
         }
+    }
+
+    void Shoot()
+    {
+        GameObject ArrowIns = Instantiate(Arrow, transform.position, theRotationOfTheBow.rotation);
+        ArrowIns.GetComponent<Rigidbody2D>().AddForce(-transform.right * LaunchForce);
     }
 }
