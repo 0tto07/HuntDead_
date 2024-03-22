@@ -7,7 +7,7 @@ public class DrakeController : MonoBehaviour
     public Transform player;
     public float followSpeed = 3f;
     public float killDistance = 2f;
-    public int damageAmount = 3; // Amount of damage to inflict on the player
+    public int damageAmount = 3;
 
     void Update()
     {
@@ -16,23 +16,23 @@ public class DrakeController : MonoBehaviour
             return;
         }
 
-        Vector2 targetPosition = new Vector2(player.position.x, transform.position.y);
-        transform.position = Vector2.MoveTowards(transform.position, targetPosition, followSpeed * Time.deltaTime);
+        Vector3 targetPosition = new Vector3(player.position.x, player.position.y, transform.position.z);
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, followSpeed * Time.deltaTime);
+    }
 
-        // Check if the player is too slow
-        if (Mathf.Abs(player.position.x - transform.position.x) < killDistance)
+    
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
         {
-            Debug.Log("You're too slow! Player takes damage!");
-
-            // Inflict damage on the player
-            InflictDamage();
+            Debug.Log("You're too close! Player takes damage!");
+            InflictDamage(other.gameObject);
         }
     }
 
-    void InflictDamage()
+    void InflictDamage(GameObject playerObject)
     {
-        // Assuming the player has a Health script attached
-        PlayerData playerHealth = player.GetComponent<PlayerData>();
+        PlayerData playerHealth = playerObject.GetComponent<PlayerData>();
 
         if (playerHealth != null)
         {
@@ -44,5 +44,7 @@ public class DrakeController : MonoBehaviour
         }
     }
 }
+
+
 
 
