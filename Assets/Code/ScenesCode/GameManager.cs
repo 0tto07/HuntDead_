@@ -29,6 +29,10 @@ public class GameManger : MonoBehaviour
     {
       gameOverUI.SetActive(true);
     }
+    public void LoadGame()
+    {
+        SceneManager.LoadScene("HuntDeadMap1");
+    }
 
 
     // Update is called once per frame
