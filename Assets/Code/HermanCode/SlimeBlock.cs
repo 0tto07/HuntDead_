@@ -5,15 +5,15 @@ using UnityEngine;
 public class SlimeBlock : MonoBehaviour
 {
     public float initialBounceForce = 10f;
-    public float bounceForceIncrement = 5f; 
-    public float minVelocityY = 0.1f; 
+    public float bounceForceIncrement = 5f;
+    public float minVelocityY = 0.1f;
 
-    private float currentBounceForce; 
-    private bool isBouncing; 
+    private float currentBounceForce;
+    private bool isBouncing;
 
     private void Start()
     {
-        currentBounceForce = initialBounceForce; 
+        currentBounceForce = initialBounceForce;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -24,26 +24,19 @@ public class SlimeBlock : MonoBehaviour
             Vector2 bounceDirection = Vector2.up * currentBounceForce;
             rb.velocity = bounceDirection;
 
-            
+
             currentBounceForce += bounceForceIncrement;
 
-            
+
             isBouncing = true;
         }
-    }
 
-    private void Update()
-    {
-       
-        if (!isBouncing && Mathf.Abs(GetComponent<Rigidbody2D>().velocity.y) < minVelocityY)
+
+        //Get the airtime value from player to calculate the jumpforce
+        if (collision.gameObject.CompareTag("Player"))
         {
-            
-            currentBounceForce = initialBounceForce;
-        }
-        else
-        {
-            
-            isBouncing = false;
+            float thePlayerAirTime = collision.gameObject.GetComponent<PlayerMovement>().airTime;
+            Debug.Log(thePlayerAirTime);
         }
     }
 }
