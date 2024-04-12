@@ -16,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
     private bool overrideFlipDirection = false;
     private float flipDirection = 1f; // 1 for right, -1 for left
 
+    public float airTime; 
+
     Animator myAnimator;
     Rigidbody2D myRigidbody;
     AudioManager myAudioManager;
@@ -40,6 +42,15 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             jumpPressed = true;
+        }
+
+        //Calculate the time in air for squshiy-jump-pads
+        if(!IsGrounded())
+        {
+            airTime += Time.deltaTime;
+        }   else
+        {
+            airTime = 0;
         }
     }
 
