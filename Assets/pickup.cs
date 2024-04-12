@@ -9,6 +9,7 @@ public class FollowPlayer : MonoBehaviour
     public float distanceThreshold = 10f; // Distance threshold for adjusting speed
 
     private Rigidbody2D rb;
+    private bool startFollowing = false; // Flag to determine if following should start
 
     void Start()
     {
@@ -22,7 +23,7 @@ public class FollowPlayer : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (player == null)
+        if (!startFollowing || player == null)
             return;
 
         // Calculate the distance between object and player
@@ -38,12 +39,12 @@ public class FollowPlayer : MonoBehaviour
         rb.velocity = direction * speed;
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        if (other.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            // Start following when the player touches the object
-            // (Optional: you can add effects or sounds here)
+            // Start following when the player collides with the object
+            startFollowing = true;
         }
     }
 }

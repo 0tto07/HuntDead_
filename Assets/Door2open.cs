@@ -9,6 +9,7 @@ public class DoorScript : MonoBehaviour
     private bool hasKey = false;
     private bool isPlayerClose = false;
     private bool isSolid = true;
+    private bool canCollide = true; // Flag to determine if the door can collide with other objects
     private Collider2D doorCollider;
 
     void Start()
@@ -47,5 +48,18 @@ public class DoorScript : MonoBehaviour
     {
         isSolid = solid;
         doorCollider.isTrigger = !solid; // If solid, use collider for collision. Otherwise, use it as a trigger.
+        canCollide = solid; // Update the flag to allow or disallow collision with other objects
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (!canCollide)
+        {
+            // If the door should not collide with anything, return without processing collision
+            return;
+        }
+
+        // Handle collision with other objects normally
+        // Add your collision handling logic here
     }
 }
