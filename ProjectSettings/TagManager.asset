@@ -13,6 +13,7 @@ TagManager:
   - Spike
   - BOX
   - WinObject
+  - Key
   layers:
   - Default
   - TransparentFX
@@ -30,7 +31,7 @@ TagManager:
   - WinObject
   - Wall
   - Tiles
-  - 
+  - Key
   - 
   - 
   - 
