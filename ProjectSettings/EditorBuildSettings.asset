@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/HuntDeadMap1.unity
     guid: b1cd93f6f5e628e4f86fa14daa05c906
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: d358ee2f210dc22408a649a59259c887
+  - enabled: 1
+    path: Assets/Scenes/Options.unity
+    guid: 7885951a27f4108489322f10ab9e2feb
   m_configObjects: {}
