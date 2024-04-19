@@ -727,9 +727,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d7f1299b011d494891d2854027335f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1336189880}
   key: {fileID: 1906555589}
-  interactDistance: 1.5
+  doorCollider: {fileID: 253311103}
+  openSpeed: 5
+  openPosition: {x: 50, y: 50, z: 0}
 --- !u!61 &253311105
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2082,6 +2083,7 @@ MonoBehaviour:
   maxSpeed: 10
   minSpeed: -2
   distanceThreshold: 10
+  door: {fileID: 0}
 --- !u!212 &1906555591
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2243,11 +2245,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5197043185255357053, guid: cb26807a68af37b4cbcd6f088781550c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.713148
+      value: -0.48
       objectReference: {fileID: 0}
     - target: {fileID: 5197043185255357053, guid: cb26807a68af37b4cbcd6f088781550c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.030435
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 5197043185255357053, guid: cb26807a68af37b4cbcd6f088781550c, type: 3}
       propertyPath: m_LocalPosition.z

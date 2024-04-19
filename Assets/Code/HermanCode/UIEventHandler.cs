@@ -2,11 +2,14 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using System.Collections.Generic;// Required when using Event data.
+using System.Collections.Generic;
+using UnityEditor.Animations;// Required when using Event data.
 
 public class UIEventHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public List<GameObject> ObjectsToActivate = new List<GameObject>();
+    public AudioSource audioSource;
+    public AudioClip hoverSound;
     public void OnPointerEnter(PointerEventData eventData)
     {
         Debug.Log("Hej");
@@ -14,6 +17,13 @@ public class UIEventHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         foreach (GameObject obj in ObjectsToActivate)
         {
             obj.SetActive(true);
+          
+            
+        }
+        if (hoverSound != null && audioSource != null)
+        {
+            audioSource.clip = hoverSound;
+            audioSource.Play();
         }
     }
 
