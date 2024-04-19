@@ -1,16 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.Android;
 using UnityEngine.SceneManagement;
 
 
 public class GameManger : MonoBehaviour
 {
     public GameObject gameOverUI;
-    // Start is called before the first frame update
+    public AudioClip soundEffect;
+    private AudioSource audioSource;
+   
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
         
+        audioSource.clip = soundEffect;
     }
     public void MainMenu()
     {
@@ -39,9 +46,22 @@ public class GameManger : MonoBehaviour
     }
     public void LoadGame()
     {
-        SceneManager.LoadScene("HuntDeadMap1");
+        StartCoroutine(LoadGameRoutine());
+
     }
 
+
+    IEnumerator LoadGameRoutine()
+    {
+        Debug.Log("This happens");
+        audioSource.Play();
+        yield return new WaitForSeconds(3);
+        Debug.Log("Then this happens");
+
+        SceneManager.LoadScene("HuntDeadMap1");
+
+
+    }
 
     // Update is called once per frame
     void Update()
