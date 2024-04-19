@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     bool canMoveHorizontally = true;
     private bool overrideFlipDirection = false;
     private float flipDirection = 1f; // 1 for right, -1 for left
+    public float FacingDirection => transform.localScale.x;  // 1 is right and -1 is left
 
     public float airTime; 
 

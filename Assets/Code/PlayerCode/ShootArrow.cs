@@ -38,18 +38,21 @@ public class ShootArrow : MonoBehaviour
         mouseWorldPosition.z = transform.position.z; // Ensure the z-position is fixed to keep the aiming in 2D plane.
 
         Vector2 directionToMouse = mouseWorldPosition - transform.position;
-        float angle = Mathf.Atan2(directionToMouse.y, directionToMouse.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(directionToMouse.y, directionToMouse.x) * Mathf.Rad2Deg + 180; // Add 180 degrees to rotate the facing direction
 
-        // Restrict the aiming to 180 degrees on the right side
-        angle = Mathf.Clamp(angle, -90f, 90f); // Clamps the angle to be within -90 and 90 degrees
+        // Correct angle wrapping around 360 degrees
+        if (angle > 360) angle -= 360;
+
+        // Clamp the angle to avoid front and back flipping over 180 degrees
+        angle = Mathf.Clamp(angle, 90f, 270f);
 
         transform.rotation = Quaternion.Euler(0, 0, angle);
-        transform.position = thePlayerPosition.position + transform.right * BowOffset; // Correctly place the bow with the offset
+        transform.position = thePlayerPosition.position - transform.right * BowOffset; // Correctly place the bow on the left side with the offset
     }
 
     void Shoot()
     {
-        GameObject ArrowIns = Instantiate(Arrow, transform.position, theRotationOfTheBow.rotation);
-        ArrowIns.GetComponent<Rigidbody2D>().AddForce(transform.right * LaunchForce); // Ensures the arrow is always shot to the right
+        GameObject ArrowIns = Instantiate(Arrow, transform.position, Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z - 180)); // Adjust rotation to correct direction
+        ArrowIns.GetComponent<Rigidbody2D>().AddForce(-transform.right * LaunchForce); // Ensures the arrow is now shot to the left
     }
 }
