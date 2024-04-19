@@ -7,6 +7,7 @@ public class FollowPlayer : MonoBehaviour
     public float maxSpeed = 10f; // Maximum speed when far away from the player
     public float minSpeed = 2f; // Minimum speed when close to the player
     public float distanceThreshold = 10f; // Distance threshold for adjusting speed
+    public Door door; // Reference to the door object
 
     private Rigidbody2D rb;
     private bool startFollowing = false; // Flag to determine if following should start
@@ -37,6 +38,13 @@ public class FollowPlayer : MonoBehaviour
 
         // Apply force towards the player
         rb.velocity = direction * speed;
+
+        // Check if the door reference is not null and following has started
+        if (door != null && startFollowing)
+        {
+            // Open the door when following starts
+            door.OpenDoor();
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
