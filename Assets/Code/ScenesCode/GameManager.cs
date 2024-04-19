@@ -25,16 +25,15 @@ public class GameManger : MonoBehaviour
     } 
     public void Options()
     {
-        SceneManager.LoadScene("Options");
+        StartCoroutine(LoadGameRoutineOptions());
     }
     public void Credits()
     {
-        SceneManager.LoadScene("Credits");
+        StartCoroutine(LoadGameRoutineCredits());
     }
     public void quit()
     {
-        Application.Quit();
-        Debug.Log("Quit");
+        StartCoroutine(LoadGameRoutineQuit());
     }
     public void Reset()
     {
@@ -46,23 +45,53 @@ public class GameManger : MonoBehaviour
     }
     public void LoadGame()
     {
-        StartCoroutine(LoadGameRoutine());
+        StartCoroutine(LoadGameRoutineLoadGame());
 
     }
 
 
-    IEnumerator LoadGameRoutine()
+    IEnumerator LoadGameRoutineLoadGame()
     {
         Debug.Log("This happens");
         audioSource.Play();
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
         Debug.Log("Then this happens");
 
         SceneManager.LoadScene("HuntDeadMap1");
 
 
     }
+    IEnumerator LoadGameRoutineOptions()
+    {
+        Debug.Log("This happens");
+        audioSource.Play();
+        yield return new WaitForSeconds(2);
+        Debug.Log("Then this happens");
 
+        SceneManager.LoadScene("Options");
+
+
+    }
+    IEnumerator LoadGameRoutineCredits()
+    {
+        Debug.Log("This happens");
+        audioSource.Play();
+        yield return new WaitForSeconds(2);
+        Debug.Log("Then this happens");
+
+        SceneManager.LoadScene("Credits");
+    }
+    IEnumerator LoadGameRoutineQuit()
+    {
+        Debug.Log("This happens");
+        audioSource.Play();
+        yield return new WaitForSeconds(2);
+        Debug.Log("Then this happens");
+
+        Application.Quit();
+        Debug.Log("Quit");
+
+    }
     // Update is called once per frame
     void Update()
     {
