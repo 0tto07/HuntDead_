@@ -1,9 +1,11 @@
 using UnityEngine;
+using System.Collections;
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float runSpeed = 8f;
     [SerializeField] float jumpSpeed = 10f;
+    [SerializeField] float bufferTime = 0.05f;
     [SerializeField] Transform groundCheck;
     [SerializeField] LayerMask groundLayer;
 
@@ -44,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Jump"))
         {
-            jumpPressed = true;
+            StartCoroutine(JumpBuffer());
         }
 
       
@@ -147,5 +149,12 @@ public class PlayerMovement : MonoBehaviour
     public float GetAirTime()
     {
         return airTime;
+    }
+
+    private IEnumerator JumpBuffer()
+    {
+        jumpPressed = true;
+        yield return new WaitForSeconds(bufferTime);
+        jumpPressed = false;
     }
 }

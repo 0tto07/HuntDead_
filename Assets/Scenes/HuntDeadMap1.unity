@@ -10620,7 +10620,7 @@ GameObject:
   - component: {fileID: 1132910816}
   - component: {fileID: 1132910815}
   - component: {fileID: 1132910814}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Lock Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11709,7 +11709,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1216789462}
   - component: {fileID: 1216789461}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Lock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
