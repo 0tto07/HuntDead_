@@ -2,41 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlimeBlock : MonoBehaviour
+public class Slime : MonoBehaviour
 {
-    public float initialBounceForce = 10f;
-    public float bounceForceIncrement = 5f;
-    public float minVelocityY = 0.1f;
+   
+    public float shortAirTimeBounceForce = 300f;
+    public float mediumAirTimeBounceForce = 500f;
+    public float longAirTimeBounceForce = 700f;
 
-    private float currentBounceForce;
-    private bool isBouncing;
-
-    private void Start()
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        currentBounceForce = initialBounceForce;
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        Rigidbody2D rb = collision.collider.GetComponent<Rigidbody2D>();
-        if (rb != null)
+        if (other.gameObject.CompareTag("Player"))
         {
-            Vector2 bounceDirection = Vector2.up * currentBounceForce;
-            rb.velocity = bounceDirection;
+            PlayerMovement playerMovement = other.gameObject.GetComponent<PlayerMovement>();
+            float thePlayerAirTime = playerMovement.GetAirTime();
 
+            float bounceForce = 0f;
 
-            currentBounceForce += bounceForceIncrement;
+            if (thePlayerAirTime < 0.25f) 
+            {
+                Debug.Log("Shortest bounce");
+                bounceForce = shortAirTimeBounceForce;
+            }
+            else if (thePlayerAirTime < 0.5f) 
+            {
+                Debug.Log("Little longer bounce");
+                bounceForce = mediumAirTimeBounceForce;
+            }
+            else 
+            {
+                Debug.Log("Longest bounce");
+                bounceForce = longAirTimeBounceForce;
+            }
 
-
-            isBouncing = true;
-        }
-
-
-        //Get the airtime value from player to calculate the jumpforce
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            float thePlayerAirTime = collision.gameObject.GetComponent<PlayerMovement>().airTime;
-            Debug.Log(thePlayerAirTime);
+            
+            Rigidbody2D playerRigidbody = other.gameObject.GetComponent<Rigidbody2D>();
+            Vector2 bounceDirection = Vector2.up; 
+            playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, 0f); 
+            playerRigidbody.AddForce(bounceDirection * bounceForce);
         }
     }
 }
