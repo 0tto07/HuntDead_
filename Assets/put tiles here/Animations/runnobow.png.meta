@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3dc93bb89712166478b397b1b972de6b
+guid: 149b42f8949e03242ae69b6a7c703ebe
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 40
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -110,12 +110,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: zombeh_0
+      name: runnobow_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 12
         y: 0
-        width: 64
+        width: 46
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -124,19 +124,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 143048f3a0c93b048ba1512dc4e97765
-      internalID: 1106553099
+      spriteID: a92374c93e7d187408f360521fafbb8e
+      internalID: 1346724904
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: zombeh_1
+      name: runnobow_1
       rect:
         serializedVersion: 2
-        x: 64
+        x: 75
         y: 0
-        width: 64
+        width: 41
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -145,19 +145,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e60a46c284899644ea3ea5370999b876
-      internalID: 383602008
+      spriteID: bfbadb7514222d8408b0cd0029bf1ff2
+      internalID: 1395014972
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: zombeh_2
+      name: runnobow_2
       rect:
         serializedVersion: 2
-        x: 128
+        x: 153
         y: 0
-        width: 64
+        width: 26
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -166,8 +166,113 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4c78b5062192cb545ae19525984fae1d
-      internalID: -611142010
+      spriteID: d6735701ee11816489ee7fa20a956eb8
+      internalID: -113604505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: runnobow_3
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 0
+        width: 34
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71579513be495a94397bb1bbcf8ad8e8
+      internalID: -2009095221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: runnobow_4
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 0
+        width: 41
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c06f9efd08933e64c812fccb62518e68
+      internalID: -1441014458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: runnobow_5
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 0
+        width: 53
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c8459c066c16724a904b36baf94b9a7
+      internalID: -1278558889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: runnobow_6
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 0
+        width: 34
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a57059f841300534eabc62134151cc0f
+      internalID: -1229355276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: runnobow_7
+      rect:
+        serializedVersion: 2
+        x: 467
+        y: 0
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7b28e81d54ac3d449cbddee819f9e22
+      internalID: 1284543672
       vertices: []
       indices: 
       edges: []
@@ -183,9 +288,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      zombeh_0: 1106553099
-      zombeh_1: 383602008
-      zombeh_2: -611142010
+      runnobow_0: 1346724904
+      runnobow_1: 1395014972
+      runnobow_2: -113604505
+      runnobow_3: -2009095221
+      runnobow_4: -1441014458
+      runnobow_5: -1278558889
+      runnobow_6: -1229355276
+      runnobow_7: 1284543672
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
