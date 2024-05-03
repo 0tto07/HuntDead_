@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d43061048a76ef048ac5d91d8ef3718a
+guid: 90ba5264f425b864d83cf0ce9f2882de
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,10 +110,10 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: player idle_0
+      name: zombi_idle_punch_0
       rect:
         serializedVersion: 2
-        x: 22
+        x: 24
         y: 0
         width: 19
         height: 64
@@ -124,19 +124,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d25d3f407e30f4d4490743f23cdbd045
-      internalID: -1099331303
+      spriteID: ac287db16d9948044add9bd797826d77
+      internalID: -400274471
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player idle_1
+      name: zombi_idle_punch_1
       rect:
         serializedVersion: 2
-        x: 86
+        x: 88
         y: 0
-        width: 19
+        width: 23
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -145,19 +145,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ecfde66a6b12f8b4e98462b6274ae290
-      internalID: -1536008780
+      spriteID: 506f4c427e7d4c64fba1b2152701322c
+      internalID: 92402671
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player idle_2
+      name: zombi_idle_punch_2
       rect:
         serializedVersion: 2
-        x: 150
+        x: 152
         y: 0
-        width: 19
+        width: 24
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -166,19 +166,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6edc2146a3005ae4a8c8760c61adc490
-      internalID: 525284768
+      spriteID: 3567369b6d5905e40be5c281a090eead
+      internalID: 480214195
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player idle_3
+      name: zombi_idle_punch_3
       rect:
         serializedVersion: 2
-        x: 214
+        x: 216
         y: 0
-        width: 19
+        width: 25
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -187,8 +187,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e28bf94d8a63b834689780f012011b6e
-      internalID: -97656895
+      spriteID: 9519e55bd816b254a97dbe524fb2ca36
+      internalID: 985960510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombi_idle_punch_4
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 0
+        width: 23
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cce58a7f4d60d6241aca41f92ed77782
+      internalID: -1458409769
       vertices: []
       indices: 
       edges: []
@@ -204,10 +225,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      player idle_0: -1099331303
-      player idle_1: -1536008780
-      player idle_2: 525284768
-      player idle_3: -97656895
+      zombi_idle_punch_0: -400274471
+      zombi_idle_punch_1: 92402671
+      zombi_idle_punch_2: 480214195
+      zombi_idle_punch_3: 985960510
+      zombi_idle_punch_4: -1458409769
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

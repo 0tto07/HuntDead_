@@ -13,25 +13,52 @@ public class EnemyMovement : MonoBehaviour
 
     private bool facingRight = true;
 
+    private bool isNearToPlayer;
+
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        myAnimator = GetComponent<Animator>();
+        myAnimator = GetComponentInChildren<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        // Calculate the distance between enemy and player
+       
         float distanceToTarget = Vector2.Distance(transform.position, target.position);
 
         if (distanceToTarget <= followRadius)
         {
-            // Move towards the player
-            myAnimator.SetBool("isWalking", true);
-            transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
 
-            // Check if the enemy is moving left or right and flip accordingly
+            if(distanceToTarget <= 1) {
+
+                isNearToPlayer = true;
+                myAnimator.SetBool("isPunching", true);
+                // GetComponent<CircleCollider2D>().enabled = true;
+
+                Invoke("Punch", 0.5f);
+
+
+            }   
+            else
+            {
+                isNearToPlayer = false;
+                myAnimator.SetBool("isPunching", false);
+                GetComponent<CircleCollider2D>().enabled = false;
+            }
+           
+           
+
+            if (!isNearToPlayer)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+                myAnimator.SetBool("isWalking", true);
+            }   else
+            {
+                myAnimator.SetBool("isWalking", false);
+            }
+
+
+           
             if (transform.position.x < target.position.x && !facingRight)
             {
                 Flip();
@@ -68,6 +95,13 @@ public class EnemyMovement : MonoBehaviour
                 playerData.TakeDamage(1);
             }
         }
+    }
+
+    public void Punch()
+    {
+        CircleCollider2D circle = GetComponent<CircleCollider2D>();
+        circle.enabled = true;
+        Debug.Log("circle is: " + circle.enabled);
     }
 }
 
