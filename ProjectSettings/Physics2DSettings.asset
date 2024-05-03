@@ -43,6 +43,6 @@ Physics2DSettings:
   m_QueriesStartInColliders: 1
   m_CallbacksOnDisable: 1
   m_ReuseCollisionCallbacks: 1
-  m_AutoSyncTransforms: 0
+  m_AutoSyncTransforms: 1
   m_GizmoOptions: 10
   m_LayerCollisionMatrix: ffecfefffffcfefffffcfefffffdfeffffecfeff7fe0fefffffcfeff5ff8feff08f0feff00f6feff5ffeffffdffcfeffcefffefffffffefffffffefffffffeff0004feffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
