@@ -78,3 +78,9 @@ TagManager:
   - name: Closeforground
     uniqueID: 3963394133
     locked: 0
+  - name: Star
+    uniqueID: 4229876389
+    locked: 0
+  - name: Moon
+    uniqueID: 1451712585
+    locked: 0
