@@ -5,11 +5,12 @@ using System.Collections;
 public class PlayerData : MonoBehaviour
 {
     public int maxHealth = 3;
-    private int currentHealth;
+    public int currentHealth;
     private bool isInvincible = false;
     public float invincibilityDurationSeconds = 0.2f;
     public GameManger gameManger;
     private AudioSource SFX_hitSound;
+    [SerializeField] 
 
     // Getter method for currentHealth
     public int GetCurrentHealth()
