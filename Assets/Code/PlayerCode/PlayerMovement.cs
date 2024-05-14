@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
     {
         moveInput.x = Input.GetAxisRaw("Horizontal");
 
-        Debug.Log("Player airtime is: " + airTime);
+       // Debug.Log("Player airtime is: " + airTime);
 
         if (Input.GetButtonDown("Jump"))
         {

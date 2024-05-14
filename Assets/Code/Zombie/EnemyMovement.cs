@@ -14,9 +14,13 @@ public class EnemyMovement : MonoBehaviour
 
     private bool facingRight = true;
 
-    private bool isNearToPlayer;
+    [SerializeField] bool isNearToPlayer;
 
     Rigidbody2D enemyRb;
+
+    CircleCollider2D circle;
+
+    private bool hasFoundPlayer;
 
     private void Awake()
     {
@@ -34,58 +38,65 @@ public class EnemyMovement : MonoBehaviour
        
         float distanceToTarget = Vector2.Distance(transform.position, target.position);
 
-        if (distanceToTarget <= followRadius)
+        if(!hasFoundPlayer)
         {
-
-            if(distanceToTarget <= 1) {
-
-                isNearToPlayer = true;
-                myAnimator.SetBool("isPunching", true);
-              
-
-                Invoke(nameof(Punch), 0.5f);
-
-
-            }   
-            else
+            if (distanceToTarget <= followRadius)
             {
-                isNearToPlayer = false;
-                myAnimator.SetBool("isPunching", false);
-                GetComponent<CircleCollider2D>().enabled = false;
-                Rigidbody2D enemyRb = GetComponent<Rigidbody2D>();
-                if (!isNearToPlayer)
+
+                if (distanceToTarget <= 1)
                 {
-                    enemyRb.AddForce((target.position - transform.position).normalized * speed * Time.deltaTime, ForceMode2D.Impulse); ;
-                    myAnimator.SetBool("isWalking", true);
+                    hasFoundPlayer = true;
+                    Debug.Log("I found the player");
+                    isNearToPlayer = true;
+                    myAnimator.SetBool("isPunching", true);
+
+
+                    Invoke(nameof(Punch), 0.5f);
+
+
                 }
                 else
                 {
-                    myAnimator.SetBool("isWalking", false);
+                    isNearToPlayer = false;
+                    myAnimator.SetBool("isPunching", false);
+                    GetComponent<CircleCollider2D>().enabled = false;
+                    Rigidbody2D enemyRb = GetComponent<Rigidbody2D>();
+                    if (!isNearToPlayer)
+                    {
+                        enemyRb.AddForce((target.position - transform.position).normalized * speed * Time.deltaTime, ForceMode2D.Impulse); ;
+                        myAnimator.SetBool("isWalking", true);
+                    }
+                    else
+                    {
+                        myAnimator.SetBool("isWalking", false);
+                    }
+
+
+
                 }
 
 
 
+
+
+
+
+                if (transform.position.x < target.position.x && !facingRight)
+                {
+                    Flip();
+                }
+                else if (transform.position.x > target.position.x && facingRight)
+                {
+                    Flip();
+                }
             }
-           
-           
-
-       
-
-
-           
-            if (transform.position.x < target.position.x && !facingRight)
+            else
             {
-                Flip();
-            }
-            else if (transform.position.x > target.position.x && facingRight)
-            {
-                Flip();
+                myAnimator.SetBool("isWalking", false);
             }
         }
-        else
-        {
-            myAnimator.SetBool("isWalking", false);
-        }
+
+        
     }
 
     void Flip()
@@ -99,17 +110,17 @@ public class EnemyMovement : MonoBehaviour
         transform.localScale = theScale;
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            PlayerData playerData = collision.gameObject.GetComponent<PlayerData>();
-            if (playerData != null)
-            {
-                playerData.TakeDamage(1);
-            }
-        }
-    }
+    //void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Player"))
+    //    {
+    //        PlayerData playerData = collision.gameObject.GetComponent<PlayerData>();
+    //        if (playerData != null)
+    //        {
+    //            playerData.TakeDamage(1);
+    //        }
+    //    }
+    //}
     void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log(collision.gameObject.name);
@@ -131,7 +142,7 @@ public class EnemyMovement : MonoBehaviour
         enemyRb.constraints = RigidbodyConstraints2D.FreezePosition;
 
         enemyRb.freezeRotation = true;
-        CircleCollider2D circle = GetComponent<CircleCollider2D>();
+        circle = GetComponent<CircleCollider2D>();
         circle.enabled = true;
         circle.isTrigger = true;
         Physics2D.SyncTransforms();
@@ -139,6 +150,13 @@ public class EnemyMovement : MonoBehaviour
         Invoke(nameof(UnFreeze), 0.1f);
         
         Debug.Log("circle is: " + circle.enabled);
+        Invoke(nameof(ResetPunchColider), 0.2f);
+    }
+
+    void ResetPunchColider()
+    {
+        circle.enabled = false;
+        hasFoundPlayer = false;
     }
 
     public void UnFreeze()
