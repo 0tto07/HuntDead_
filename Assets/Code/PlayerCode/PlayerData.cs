@@ -10,7 +10,7 @@ public class PlayerData : MonoBehaviour
     public float invincibilityDurationSeconds = 0.2f;
     public GameManger gameManger;
     private AudioSource SFX_hitSound;
-    [SerializeField] 
+    Animator myAnimator;
 
     // Getter method for currentHealth
     public int GetCurrentHealth()
@@ -23,13 +23,17 @@ public class PlayerData : MonoBehaviour
     {
         SFX_hitSound = GameObject.Find("SFX_hitSound").GetComponent<AudioSource>(); 
         currentHealth = maxHealth;
+        myAnimator = GetComponentInChildren<Animator>();
     }
 
     public void TakeDamage(int damageAmount)
     {
         if (isInvincible) return;
+        
 
         currentHealth -= damageAmount;
+
+        
 
         // Implement invincibility frames
         if (currentHealth > 0)
@@ -56,10 +60,12 @@ public class PlayerData : MonoBehaviour
 
     private IEnumerator BecomeInvincible()
     {
-        if(SFX_hitSound != null) {
+        if(SFX_hitSound != null) 
+        {
             SFX_hitSound.Play();
         }
-            
+
+        myAnimator.SetTrigger("TakesDamage");
         isInvincible = true;
         yield return new WaitForSeconds(invincibilityDurationSeconds);
         isInvincible = false;
