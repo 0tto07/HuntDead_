@@ -49,7 +49,19 @@ public class GameManger : MonoBehaviour
 
     }
 
+    public void NextLvl()
+    {
+        StartCoroutine(LoadGameRoutineNextLvl());
+    }
 
+    IEnumerator LoadGameRoutineNextLvl()
+    {
+        Debug.Log("This happens");
+        audioSource.Play();
+        yield return new WaitForSeconds(2);
+        Debug.Log("Then this happens");
+        SceneManager.LoadScene("LevelsMap");
+    }
     IEnumerator LoadGameRoutineLoadGame()
     {
         Debug.Log("This happens");
@@ -61,6 +73,7 @@ public class GameManger : MonoBehaviour
 
 
     }
+    
     IEnumerator LoadGameRoutineOptions()
     {
         Debug.Log("This happens");

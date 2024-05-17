@@ -7,13 +7,15 @@ public class ArrowScript : MonoBehaviour
     private int groundLayer;
     private int groundedArrowLayer;
     private int zombieLayer;
-
+     
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         groundLayer = LayerMask.NameToLayer("Ground");
         groundedArrowLayer = LayerMask.NameToLayer("GroundedArrow");
         zombieLayer = LayerMask.NameToLayer("Zombie");
+       
+
     }
 
     void Update()
@@ -41,6 +43,7 @@ public class ArrowScript : MonoBehaviour
         {
             DamageZombie(collision.gameObject);
         }
+        
     }
 
     private void GroundArrow()
