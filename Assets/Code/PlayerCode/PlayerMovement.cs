@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
     {
         moveInput.x = Input.GetAxisRaw("Horizontal");
 
-       Debug.Log("Player airtime is: " + airTime);
+       //Debug.Log("Player airtime is: " + airTime);
 
         if (Input.GetButtonDown("Jump"))
         {
@@ -80,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (playerHasHorizontalSpeed && !walkSoundIsPlaying && IsGrounded())
         {
-            Debug.Log("hej");
+            //Debug.Log("hej");
             walkSoundIsPlaying = true;
             AudioManager.Instance.PlaySFX("PlayerWalk");
         }   
@@ -89,12 +89,14 @@ public class PlayerMovement : MonoBehaviour
         if(!playerHasHorizontalSpeed || !IsGrounded())
         {
             walkSoundIsPlaying = false;
-            AudioManager.Instance.StopSoundEffect();
+            //AudioManager.Instance.StopSoundEffect();
         }
     }
 
     void Jump()
     {
+        Debug.Log("AAAAA");
+
         if (jumpPressed && IsGrounded())
         {
             myRigidbody.velocity += new Vector2(0f, jumpSpeed);

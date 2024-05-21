@@ -15,7 +15,7 @@ public class PlayerData : MonoBehaviour
     // Getter method for currentHealth
     public int GetCurrentHealth()
     {
-        Debug.Log($"Current health: {currentHealth}");
+        
         return currentHealth;
     }
 
