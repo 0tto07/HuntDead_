@@ -80,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (playerHasHorizontalSpeed && !walkSoundIsPlaying && IsGrounded())
         {
-            //Debug.Log("hej");
+            Debug.Log("hej");
             walkSoundIsPlaying = true;
             AudioManager.Instance.PlaySFX("PlayerWalk");
         }   
@@ -89,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
         if(!playerHasHorizontalSpeed || !IsGrounded())
         {
             walkSoundIsPlaying = false;
-            //AudioManager.Instance.StopSoundEffect();
+            AudioManager.Instance.StopSoundEffect();
         }
     }
 
