@@ -5,10 +5,13 @@ public class ZombieData : MonoBehaviour
 {
     public int hitPoints = 3;
     Animator myAnimator;
+    AudioManager myAudioManager;
 
     private void Awake()
     {
         myAnimator = GetComponentInChildren<Animator>();
+
+        myAudioManager = GetComponent<AudioManager>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -18,6 +21,7 @@ public class ZombieData : MonoBehaviour
 
             myAnimator.SetTrigger("TakesDamage");
             hitPoints--;
+            AudioManager.Instance.PlaySFX("ZombieDamage");
             if (hitPoints <= 0)
             {
                 Destroy(gameObject);
