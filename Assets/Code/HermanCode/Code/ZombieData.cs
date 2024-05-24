@@ -6,11 +6,12 @@ public class ZombieData : MonoBehaviour
     public int hitPoints = 3;
     Animator myAnimator;
     AudioManager myAudioManager;
+    private AudioSource SFX_ZombieDamage;
 
     private void Awake()
     {
         myAnimator = GetComponentInChildren<Animator>();
-
+        SFX_ZombieDamage = GameObject.Find("SFX_ZombieDamage").GetComponent<AudioSource>();
         myAudioManager = GetComponent<AudioManager>();
     }
 
@@ -21,7 +22,11 @@ public class ZombieData : MonoBehaviour
 
             myAnimator.SetTrigger("TakesDamage");
             hitPoints--;
-            AudioManager.Instance.PlaySFX("ZombieDamage");
+            if (SFX_ZombieDamage != null)
+            {
+                SFX_ZombieDamage.Play();
+            }
+          
             if (hitPoints <= 0)
             {
                 Destroy(gameObject);
