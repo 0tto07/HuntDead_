@@ -51,7 +51,7 @@ public class ShootArrow : MonoBehaviour
     {
         // Instantiate arrow at the position and rotation of the bow
         GameObject ArrowIns = Instantiate(Arrow, transform.position, transform.rotation);
-        // Add force in the direction the bow is currently facing
-        ArrowIns.GetComponent<Rigidbody2D>().AddForce(transform.right * LaunchForce);
+        // Add force in the opposite direction the bow is currently facing
+        ArrowIns.GetComponent<Rigidbody2D>().AddForce(-transform.right * LaunchForce);
     }
 }
