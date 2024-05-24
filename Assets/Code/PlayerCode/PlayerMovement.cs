@@ -95,7 +95,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
-        Debug.Log("AAAAA");
+        
 
         if (jumpPressed && IsGrounded())
         {
