@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
-using UnityEditor.Animations;// Required when using Event data.
+
 
 public class UIEventHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
