@@ -13,10 +13,17 @@ public class ShootArrow : MonoBehaviour
     private float cooldown = 2f; // 2 seconds cooldown
     private float nextShootTime = 0f; // Timestamp of when you can shoot next
     private Camera mainCamera;
+    private AudioSource SFX_ArrowFlying;
 
     private void Start()
     {
         mainCamera = Camera.main;
+    }
+    private void Awake()
+    {
+    
+        SFX_ArrowFlying = GameObject.Find("SFX_ArrowFlying").GetComponent<AudioSource>();
+       
     }
 
     void Update()
@@ -27,6 +34,11 @@ public class ShootArrow : MonoBehaviour
         {
             Shoot();
             nextShootTime = Time.time + cooldown; // Set the next shoot time
+            if (SFX_ArrowFlying != null)
+            {
+                SFX_ArrowFlying.Play();
+            }
+
         }
     }
 
