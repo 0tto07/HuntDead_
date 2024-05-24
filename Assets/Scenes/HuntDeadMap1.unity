@@ -17082,6 +17082,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOverUI: {fileID: 517580684}
   soundEffect: {fileID: 0}
+  currentLevel: 1
 --- !u!4 &1349937096
 Transform:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem.Android;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 
@@ -10,6 +11,8 @@ public class GameManger : MonoBehaviour
     public GameObject gameOverUI;
     public AudioClip soundEffect;
     private AudioSource audioSource;
+
+    [SerializeField] int currentLevel;
    
     void Start()
     {
@@ -41,7 +44,18 @@ public class GameManger : MonoBehaviour
     }
     public void gameOver()
     {
-      gameOverUI.SetActive(true);
+
+        Debug.Log("THis is from gameManager and you are dead");
+        if(currentLevel == 1)
+        {
+            SceneManager.LoadScene("DeathSceneLvl");
+        }
+
+        if (currentLevel == 2)
+        {
+            SceneManager.LoadScene("DeathSceneLvl2");
+        }
+        
     }
     public void LoadGame()
     {
